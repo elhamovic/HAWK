@@ -32,5 +32,17 @@ namespace HAWK_v.Controllers
             return View();
 
         }
+        public IActionResult EmployeeMain(UserModel user)
+        {
+            HRDB em = new HRDB();
+            if (em.Exist(user) != false)
+            {
+                return View("LoginSuccess", user);
+            }
+            else
+            {
+                return View("LoginFail", user);
+            }
+        }
     }
 }
