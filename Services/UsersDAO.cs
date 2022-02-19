@@ -26,6 +26,8 @@ namespace HAWK_v.Services
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
+                        reader.Read();
+                        user.Id = (int)(reader["Id"]);
                         success = true; 
                     }
                 }

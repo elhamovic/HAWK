@@ -33,6 +33,7 @@ namespace HAWK_v.Services
                     if (reader.HasRows)
                     {
                         reader.Read();
+                        user.Id = (int)(reader["Id"]);
                         userInfo.Add(String.Format("{0}", reader["Id"]));
                         userInfo.Add(String.Format("{0}", reader["Name"]));
                         userInfo.Add(String.Format("{0}", reader["PhoneNumber"]));

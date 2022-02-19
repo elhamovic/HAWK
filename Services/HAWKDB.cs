@@ -16,5 +16,9 @@ namespace HAWK_v.Services
         {
             return userDAO.searchDB(user);
         }
+        public bool isManager(UserModel user)
+        {
+            return true;
+        }
     }
 }
