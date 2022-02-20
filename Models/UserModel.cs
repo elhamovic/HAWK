@@ -18,5 +18,6 @@ namespace HAWK_v.Models
         public string Password { get; set; }
         [DisplayName("Upload Face Image:")]
         public string Image { get; set; }
+        public string Role { get; set; }
     }
 }
