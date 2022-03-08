@@ -10,6 +10,9 @@ namespace HAWK_v.Controllers
 {
     public class HAWKController : Controller
     {
+        HAWKDB hdb = new HAWKDB();
+        HRDB hrdh = new HRDB();
+
         public IActionResult Index()
         {
 
@@ -17,10 +20,20 @@ namespace HAWK_v.Controllers
         }
         public IActionResult DBLogin(UserModel userModel)
         {
-            HAWKDB SS = new HAWKDB();
-            if (SS.isValid(userModel))
+            if (hdb.isValid(userModel))
             {
-                return View("LoginSuccess", userModel);
+                if (hdb.isManager(userModel))
+                {
+                    return View("LoginSuccess", userModel);
+                }
+                else if (hdb.isAdmin(userModel))
+                {
+                    return View("LoginSuccess", userModel);
+                }
+                else { 
+                
+                    return View("LoginSuccess", userModel);
+                }
             }
             else
             {
@@ -34,15 +47,26 @@ namespace HAWK_v.Controllers
         }
         public IActionResult EmployeeMain(UserModel user)
         {
-            HRDB em = new HRDB();
-            if (em.Exist(user) != false)
+            if (hrdh.Exist(user) != false)
             {
-                return View("LoginSuccess", user);
+                if (hdb.isManager(user))
+                {
+                    return View("LoginSuccess", user);
+                }
+                else if (hdb.isAdmin(user))
+                {
+                    return View("LoginSuccess", user);
+                }
+                else
+                {
+                    return View("LoginSuccess", user);
+                }
             }
             else
             {
                 return View("LoginFail", user);
             }
         }
+       
     }
 }

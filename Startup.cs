@@ -50,7 +50,7 @@ namespace HAWK_v
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=HAWK}/{action=Index}/{id?}");
             });
         }
     }

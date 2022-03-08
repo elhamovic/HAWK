@@ -60,5 +60,67 @@ namespace HAWK_v.Services
             }
             return success;
         }
+
+        public bool DeleteTemp(int id)
+        {
+            string sqlStatment = "DELETE FROM [dbo].[TempUser] WHERE condition Id = @id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return true;
+            }
+        }
+        public bool UpdateTemp(int id, string PSdate, string PEdate)
+        {
+            string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate WHERE Id = @id"; 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return true;
+            }
+        }
+        public bool AddTemp(int id, string PSdate, string PEdate)
+        {
+            string sqlStatment = "INSERT INTO [dbo].[TempUser] (Id, PermissionStartDate, PermissionEndDate) VALUES(@id, @PSdate, @PEdate)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return true;
+            }
+        }
     }
 }

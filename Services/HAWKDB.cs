@@ -18,6 +18,40 @@ namespace HAWK_v.Services
         }
         public bool isManager(UserModel user)
         {
+            if (user.Role.Contains("Manager"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool isAdmin(UserModel user)
+        {
+            if (user.Role == "Admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteTemp(int id)
+        {
+            userDAO.DeleteTemp(id);
+            return true;
+        }
+        public bool UpdateTemp(int id, string PSdate, string PEdate)
+        {
+            userDAO.UpdateTemp(id, PSdate, PEdate);
+            return true;
+        }
+        public bool AddTemp(int id, string PSdate, string PEdate)
+        {
+            userDAO.AddTemp(id, PSdate, PEdate);
             return true;
         }
     }
