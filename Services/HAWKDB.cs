@@ -18,7 +18,7 @@ namespace HAWK_v.Services
         }
         public bool isManager(UserModel user)
         {
-            if (user.Role.Contains("Manager"))
+            if (user.Role.ToLower().Contains("manager"))
             {
                 return true;
             }
@@ -29,7 +29,7 @@ namespace HAWK_v.Services
         }
         public bool isAdmin(UserModel user)
         {
-            if (user.Role == "Admin")
+            if (user.Role.ToLower() == "admin")
             {
                 return true;
             }

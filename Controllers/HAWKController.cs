@@ -24,7 +24,7 @@ namespace HAWK_v.Controllers
             {
                 if (hdb.isManager(userModel))
                 {
-                    return View("LoginSuccess", userModel);
+                    return View("Manager", userModel);
                 }
                 else if (hdb.isAdmin(userModel))
                 {
@@ -51,7 +51,7 @@ namespace HAWK_v.Controllers
             {
                 if (hdb.isManager(user))
                 {
-                    return View("LoginSuccess", user);
+                    return View("Manager", user);
                 }
                 else if (hdb.isAdmin(user))
                 {
