@@ -18,6 +18,31 @@ namespace HAWK_v.Controllers
 
             return View();
         }
+        public IActionResult Manager()
+        {
+
+            return View();
+        }
+        public IActionResult Department()
+        {
+
+            return View();
+        }
+        public IActionResult TempUser()
+        {
+
+            return View();
+        }
+        public IActionResult AddTemp()
+        {
+
+            return View();
+        }
+        public IActionResult EditTemp()
+        {
+
+            return View();
+        }
         public IActionResult DBLogin(UserModel userModel)
         {
             if (hdb.isValid(userModel))
