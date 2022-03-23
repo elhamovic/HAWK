@@ -54,5 +54,15 @@ namespace HAWK_v.Services
             userDAO.AddTemp(id, PSdate, PEdate);
             return true;
         }
+        public bool GetAllTemp() // list for manager
+        {
+            //
+            return true;
+        }
+        public bool GetTemp(int id, string PSdate, string PEdate) //for update method
+        {
+            //
+            return true;
+        }
     }
 }

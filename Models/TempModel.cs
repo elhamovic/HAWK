@@ -12,9 +12,7 @@ namespace HAWK_v.Models
        
         public int Id { get; set; }
         [Required]
-        [DisplayName("Permission Start Date:")]
         public string PStartDate { get; set; }
-        [DisplayName("Permission End Date:")]
         public string PEndDate { get; set; }
 
     }

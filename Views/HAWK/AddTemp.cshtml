@@ -1,4 +1,5 @@
-﻿
+﻿@model HAWK_v.Models.TempModel
+
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
         <h2>New Temp-User</h2>
@@ -52,5 +53,8 @@
                 </form>
             </div>
         </div>
-        </div>
+    </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
