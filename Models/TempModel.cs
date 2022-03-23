@@ -14,6 +14,7 @@ namespace HAWK_v.Models
         [Required]
         public string PStartDate { get; set; }
         public string PEndDate { get; set; }
-
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }

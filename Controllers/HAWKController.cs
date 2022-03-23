@@ -38,6 +38,11 @@ namespace HAWK_v.Controllers
 
             return View();
         }
+        public IActionResult AddTempToDB(TempModel temp)
+        {
+            hdb.AddTemp(temp);
+            return View("TempUser");
+        }
         public IActionResult EditTemp()
         {
 

@@ -49,14 +49,17 @@ namespace HAWK_v.Services
             userDAO.UpdateTemp(id, PSdate, PEdate);
             return true;
         }
-        public bool AddTemp(int id, string PSdate, string PEdate)
+        public bool AddTemp(TempModel temp)
         {
-            userDAO.AddTemp(id, PSdate, PEdate);
+            Random rnd = new Random();
+            int num = rnd.Next();
+            temp.Id = num;
+            userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
             return true;
         }
         public bool GetAllTemp() // list for manager
         {
-            //
+            userDAO.SelectAllTemp();
             return true;
         }
         public bool GetTemp(int id, string PSdate, string PEdate) //for update method

@@ -10,7 +10,7 @@ namespace HAWK_v.Services
     public class UsersDAO
     {
         string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        TempModel[] Users;
         public bool searchDB(UserModel user)
         {
             bool success = false;
@@ -101,15 +101,17 @@ namespace HAWK_v.Services
                 return true;
             }
         }
-        public bool AddTemp(int id, string PSdate, string PEdate)
+        public bool AddTemp(int id, string PSdate, string PEdate, string Name, string Email)
         {
-            string sqlStatment = "INSERT INTO [dbo].[TempUser] (Id, PermissionStartDate, PermissionEndDate) VALUES(@id, @PSdate, @PEdate)";
+            string sqlStatment = "INSERT INTO [dbo].[TempUser] (Id, PermissionStartDate, PermissionEndDate, Name, Email) VALUES(@id, @PSdate, @PEdate, @Name, @Email)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
                 command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
                 command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
                 command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
+                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = Name;
+                command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = Email;
                 try
                 {
                     connection.Open();
@@ -120,6 +122,41 @@ namespace HAWK_v.Services
                     Console.WriteLine(e.Message);
                 }
                 return true;
+            }
+        }
+        public TempModel[] SelectAllTemp()
+        {
+            string sqlStatment = "SELECT * FROM [dbo].[TempUser] ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        //reader.Read();
+                        int index = 0;
+                        while (reader.Read() != false)
+                        {
+                            TempModel temp = new TempModel();
+                            temp.Id = (int)(reader["Id"]);
+                            temp.PStartDate = (string)(reader["PermissionStartDate"]);
+                            temp.PEndDate = (string)(reader["PermissionEndDate"]);
+                            temp.Name = (string)(reader["Name"]);
+                            temp.Email = (string)(reader["Email"]);
+
+                            Users[index] = temp;
+                            index++;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return Users;
             }
         }
     }
