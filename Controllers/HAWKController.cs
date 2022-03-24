@@ -43,9 +43,9 @@ namespace HAWK_v.Controllers
             hdb.AddTemp(temp);
             return View("TempUser", hdb.GetAllTemp());
         }
-        public IActionResult EditTemp()
+        public IActionResult EditTemp(TempModel temp)
         {
-
+            
             return View();
         }
         public IActionResult DBLogin(UserModel userModel)

@@ -59,13 +59,11 @@ namespace HAWK_v.Services
         }
         public TempModel[] GetAllTemp() // list for manager
         {
-            
             return userDAO.SelectAllTemp();
         }
-        public bool GetTemp(int id, string PSdate, string PEdate) //for update method
+        public TempModel GetTemp(int id) //for update
         {
-            //
-            return true;
+            return userDAO.SelectTemp(id);
         }
     }
 }
