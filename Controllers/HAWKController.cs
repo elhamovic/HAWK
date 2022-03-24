@@ -41,6 +41,7 @@ namespace HAWK_v.Controllers
         public IActionResult AddTempToDB(TempModel temp)
         {
             hdb.AddTemp(temp);
+            // add smartface
             return View("TempUser", hdb.GetAllTemp());
         }
         public IActionResult EditTemp(TempModel temp)
@@ -57,6 +58,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(userModel))
                 {
+                    // smartface controller
                     return View("LoginSuccess", userModel);
                 }
                 else { 
@@ -78,6 +80,7 @@ namespace HAWK_v.Controllers
         {
             if (hrdh.Exist(user) != false)
             {
+                //add smartface
                 if (hdb.isManager(user))
                 {
                     return View("Manager", user);
