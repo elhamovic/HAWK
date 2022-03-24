@@ -59,11 +59,11 @@ namespace HAWK_v.Controllers
                 else if (hdb.isAdmin(userModel))
                 {
                     // smartface controller
-                    return View("LoginSuccess", userModel);
+                    return View("EmployeeMain", userModel);
                 }
                 else { 
                 
-                    return View("LoginSuccess", userModel);
+                    return View("EmployeeMain", userModel);
                 }
             }
             else
@@ -87,11 +87,11 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(user))
                 {
-                    return View("LoginSuccess", user);
+                    return View("EmployeeMain", user);
                 }
                 else
                 {
-                    return View("LoginSuccess", user);
+                    return View("EmployeeMain", user);
                 }
             }
             else
