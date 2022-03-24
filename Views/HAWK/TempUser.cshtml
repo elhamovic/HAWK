@@ -16,16 +16,13 @@
 
 <div class="row">
     <div class="col-8">
-        <br />
-
+        <!-- <br />-->
         <div class="table-responsive">
-
             <a asp-area="" asp-controller="HAWK" asp-action="AddTemp">
                 <button type="button" class="btn btn-dark" style="float: right">
                     <i class="fas fa-plus"></i>
                 </button>
             </a>
-
             <br />
             <table class="table table-striped mt-4">
                 <thead>
@@ -38,57 +35,42 @@
                         <th>delete</th>
                     </tr>
                 </thead>
-
-
-
                 <tbody id="dataTable">
-
-                    <tr>
-                        <a asp-area="" asp-controller="HAWK" asp-action="TempUser"></a>
-
-
-
-                        <td>
-                            @foreach (var item in Model)
-                            {
-
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Name)
-                            }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PStartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PEndDate)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
+                                    <i class='fas fa-edit' style='font-size:16px'></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
+                                    <i class='fas fa-trash' style='font-size:16px'></i>
 
-                        </td>
-
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
-                                <i class='fas fa-edit' style='font-size:16px'></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
-                                <i class='fas fa-trash' style='font-size:16px'></i>
-
-                            </a>
-                        </td>
-
-                    </tr>
-
-
-
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
-
     </div>
-
     <div class="col-4">
         <br />
-
         <iframe title="HAWK-Analysis" width="700" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiZTU2Njk2ODMtZGUxNC00MDMxLTkxOWEtYjMyMDU0YjJjNDEwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection?filter=Users/Dno eq 2" frameborder="0" allowFullScreen="true"></iframe>
-
     </div>
 </div>
 
-<script>
-
-
-
-</script>
