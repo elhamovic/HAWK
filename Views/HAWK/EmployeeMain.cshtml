@@ -1,36 +1,59 @@
 ﻿@model HAWK_v.Models.UserModel
 
-<div>
-    <h4>UserModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-</dd>
-    </dl>
+@{
+    Layout = "\\EmpLayout.cshtml";
+}
+
+<div class="row tm-content-row tm-mt-big">
+    <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
+        <h2>
+            Attendance Statistics
+            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Weekly</button>
+            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Monthly</button>
+            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Yearly</button>
+        </h2>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">SignOut</a>
+
+<div class="row">
+    <div class="col-4">
+        <br />
+
+        <div class="table-responsive">
+            <table class="table table-striped mt-4">
+                <thead>
+                    <tr class="tm-bg-gray">
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8:30</td>
+                        <td>12:00</td>
+                    </tr>
+                    <tr>
+                        <td>8:30</td>
+                        <td>12:00</td>
+                    </tr>
+                    <tr>
+                        <td>8:30</td>
+                        <td>12:00</td>
+                    </tr>
+                    <tr>
+                        <td>8:30</td>
+                        <td>12:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-8">
+        <br />
+
+        <iframe title="HAWK-Analysis" width="700" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiZTU2Njk2ODMtZGUxNC00MDMxLTkxOWEtYjMyMDU0YjJjNDEwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection?filter=Users/Dno eq 2" frameborder="0" allowFullScreen="true"></iframe>
+
+    </div>
 </div>
