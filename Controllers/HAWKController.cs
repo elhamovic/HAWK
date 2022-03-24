@@ -30,8 +30,8 @@ namespace HAWK_v.Controllers
         }
         public IActionResult TempUser()
         {
-
-            return View();
+            
+            return View(hdb.GetAllTemp());
         }
         public IActionResult AddTemp()
         {
@@ -41,7 +41,7 @@ namespace HAWK_v.Controllers
         public IActionResult AddTempToDB(TempModel temp)
         {
             hdb.AddTemp(temp);
-            return View("TempUser");
+            return View("TempUser", hdb.GetAllTemp());
         }
         public IActionResult EditTemp()
         {

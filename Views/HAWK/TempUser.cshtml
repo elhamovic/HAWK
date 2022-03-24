@@ -1,6 +1,6 @@
 ﻿
 
-
+@model IEnumerable<HAWK_v.Models.TempModel>
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
         <h2>
@@ -15,11 +15,11 @@
 </div>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-8">
         <br />
 
         <div class="table-responsive">
-           
+
             <a asp-area="" asp-controller="HAWK" asp-action="AddTemp">
                 <button type="button" class="btn btn-dark" style="float: right">
                     <i class="fas fa-plus"></i>
@@ -32,16 +32,31 @@
                     <tr class="tm-bg-gray">
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Permission Start Date</th>
+                        <th>Permission End Date</th>
                         <th>edit</th>
                         <th>delete</th>
-
                     </tr>
                 </thead>
-                <tbody>
+
+
+
+                <tbody id="dataTable">
+
                     <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                        
+                        <a asp-area="" asp-controller="HAWK" asp-action="TempUser"></a>
+
+
+
+                        <td>
+                            @foreach (var item in Model)
+                            {
+
+                                @Html.DisplayFor(modelItem => item.Name)
+                            }
+
+                        </td>
+
                         <td>
                             <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
                                 <i class='fas fa-edit' style='font-size:16px'></i>
@@ -50,62 +65,30 @@
                         <td>
                             <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
                                 <i class='fas fa-trash' style='font-size:16px'></i>
+
                             </a>
                         </td>
 
                     </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
-                                <i class='fas fa-edit' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
-                                <i class='fas fa-trash' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
-                                <i class='fas fa-edit' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
-                                <i class='fas fa-trash' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
-                                <i class='fas fa-edit' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
-                                <i class='fas fa-trash' style='font-size: 16px'></i>
-                            </a>
-                        </td>
-                    </tr>
+
+
+
                 </tbody>
             </table>
         </div>
 
     </div>
 
-    <div class="col-6">
+    <div class="col-4">
         <br />
 
         <iframe title="HAWK-Analysis" width="700" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiZTU2Njk2ODMtZGUxNC00MDMxLTkxOWEtYjMyMDU0YjJjNDEwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection?filter=Users/Dno eq 2" frameborder="0" allowFullScreen="true"></iframe>
 
     </div>
 </div>
+
+<script>
+
+
+
+</script>

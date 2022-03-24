@@ -57,10 +57,10 @@ namespace HAWK_v.Services
             userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
             return true;
         }
-        public bool GetAllTemp() // list for manager
+        public TempModel[] GetAllTemp() // list for manager
         {
-            userDAO.SelectAllTemp();
-            return true;
+            
+            return userDAO.SelectAllTemp();
         }
         public bool GetTemp(int id, string PSdate, string PEdate) //for update method
         {
