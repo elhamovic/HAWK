@@ -45,8 +45,7 @@ namespace HAWK_v.Controllers
         }
         public IActionResult EditTemp(TempModel temp)
         {
-            
-            return View();
+            return View(temp);
         }
         public IActionResult DBLogin(UserModel userModel)
         {
