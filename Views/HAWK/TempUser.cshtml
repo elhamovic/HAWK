@@ -22,7 +22,7 @@
                 </button>
             </a>
             <br />
-            <table class="table table-striped mt-4">
+            <table  style="overflow:scroll" class="table table-striped mt-4">
                 <thead>
                     <tr class="tm-bg-gray">
                         <th>Name</th>
@@ -32,10 +32,11 @@
                         <th>edit</th>
                         <th>delete</th>
                     </tr>
+
                 </thead>
                 <tbody id="dataTable">
-                    @foreach (var item in Model)
-                    {
+                        @foreach (var item in Model)
+                        {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
@@ -57,12 +58,11 @@
                             <td>
                                 <a class="btn btn-outline-dark btn-floating" href="#!" role="button">
                                     <i class='fas fa-trash' style='font-size:16px'></i>
-
                                 </a>
                             </td>
                         </tr>
                     }
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>

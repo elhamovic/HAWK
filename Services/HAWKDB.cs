@@ -57,7 +57,7 @@ namespace HAWK_v.Services
             userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
             return true;
         }
-        public TempModel[] GetAllTemp() // list for manager
+        public List<TempModel> GetAllTemp() // list for manager
         {
             return userDAO.SelectAllTemp();
         }

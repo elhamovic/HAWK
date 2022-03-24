@@ -10,7 +10,7 @@ namespace HAWK_v.Services
     public class UsersDAO
     {
         string connectionString = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        TempModel[] Users;
+        List<TempModel> Users;
         public bool searchDB(UserModel user)
         {
             bool success = false;
@@ -82,7 +82,7 @@ namespace HAWK_v.Services
         }
         public bool UpdateTemp(int id, string PSdate, string PEdate)
         {
-            string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate WHERE Id = @id"; 
+            string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
@@ -124,7 +124,7 @@ namespace HAWK_v.Services
                 return true;
             }
         }
-        public TempModel[] SelectAllTemp()
+        public List<TempModel> SelectAllTemp()
         {
             string sqlStatment = "SELECT * FROM [dbo].[TempUser] ";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -136,10 +136,8 @@ namespace HAWK_v.Services
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
+                        Users = new List<TempModel>();
                         //reader.Read();
-                        Users = new TempModel[reader.FieldCount]; 
-
-                        int index = 0;
                         while (reader.Read() != false)
                         {
                             TempModel temp = new TempModel();
@@ -149,9 +147,9 @@ namespace HAWK_v.Services
                             temp.Name = (string)(reader["Name"]);
                             temp.Email = (string)(reader["Email"]);
 
-                            Users[index] = temp;
-                            index++;
+                            Users.Add(temp);
                         }
+                        
                     }
                 }
                 catch (Exception e)
