@@ -9,7 +9,7 @@ namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         TempModel[] Users;
         public bool searchDB(UserModel user)
         {
@@ -34,7 +34,7 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 string sqlStatment2 = "SELECT Role FROM [dbo].[Users] WHERE Id = @id";
                 using (SqlConnection connection2 = new SqlConnection(connectionString2))
                 {

@@ -1,41 +1,43 @@
 ﻿@model HAWK_v.Models.UserModel
-
-    <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
-        <div class=" white-block bg-white tm-block h-100">
-            <div class="Camera-form">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <img src="https://drive.google.com/uc?export=view&id=1kkZJ8XDbzRaSASbTxIuh6ghQ2fEZ-3XN"
-                             width="110" height="80">
-                        <h2 class="tm-block-title mt-3">Login</h2>
-                    </div>
+@{
+    Layout = null;
+}
+<div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
+    <div class=" white-block bg-white tm-block h-100">
+        <div class="Camera-form">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="https://drive.google.com/uc?export=view&id=1kkZJ8XDbzRaSASbTxIuh6ghQ2fEZ-3XN"
+                         width="110" height="80">
+                    <h2 class="tm-block-title mt-3">Login</h2>
                 </div>
+            </div>
 
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <form asp-action="DBLogin">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <form asp-action="DBLogin">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            <div class="form-group">
-                                <label asp-for="UserName" class="control-label"></label>
-                                <input asp-for="UserName" class="form-control" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Password" class="control-label"></label>
-                                <input asp-for="Password" type="password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="LogIn" class="btn btn-dark btn-floating m-1" style="float:right "/>
-                                <a asp-action="SignUp" class="btn btn-dark btn-floating m-1">Registration</a>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" type="password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="LogIn" class="btn btn-dark btn-floating m-1" style="float:right " />
+                            <a asp-action="SignUp" class="btn btn-dark btn-floating m-1">Registration</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-                @section Scripts {
-                    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-                }
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
