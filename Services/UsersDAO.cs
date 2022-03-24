@@ -161,5 +161,33 @@ namespace HAWK_v.Services
                 return Users;
             }
         }
+        public TempModel SelectTemp(int id)
+        {
+            TempModel temp = new TempModel();
+            string sqlStatment = "SELECT * FROM [dbo].[TempUser] WHERE UserName = @id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                            temp.Id = (int)(reader["Id"]);
+                            temp.PStartDate = (string)(reader["PermissionStartDate"]);
+                            temp.PEndDate = (string)(reader["PermissionEndDate"]);
+                            temp.Name = (string)(reader["Name"]);
+                            temp.Email = (string)(reader["Email"]);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return temp;
+            }
+        }
     }
 }
