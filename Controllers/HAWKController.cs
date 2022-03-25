@@ -49,6 +49,8 @@ namespace HAWK_v.Controllers
         {
             return View(hdb.GetTemp(id));
         }
+        [Route("HAWK/DeleteTempToDB/{id?}")]
+
         public IActionResult DeleteTempToDB(int id)
         {
             hdb.DeleteTemp(id);
