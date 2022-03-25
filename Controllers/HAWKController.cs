@@ -44,9 +44,21 @@ namespace HAWK_v.Controllers
             // add smartface
             return View("TempUser", hdb.GetAllTemp());
         }
-        public IActionResult EditTemp(TempModel temp)
+        public IActionResult EditTemp(int id)
         {
-            return View(temp);
+            return View(hdb.GetTemp(id));
+        }
+        public IActionResult DeleteTempToDB(TempModel temp)
+        {
+            hdb.DeleteTemp(temp.Id);
+            // add smartface
+            return View("TempUser", hdb.GetAllTemp());
+        }
+        public IActionResult EditTempToDB(TempModel temp)
+        {
+            hdb.UpdateTemp(temp);
+            // add smartface
+            return View("TempUser", hdb.GetAllTemp());
         }
         public IActionResult DBLogin(UserModel userModel)
         {

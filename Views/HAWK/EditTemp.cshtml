@@ -6,31 +6,25 @@
 
         <div class=" white-block bg-white tm-block h-100">
             <div class="Camera-form">
-                <form>
+                <form asp-action="EditTempToDB">
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Full Name</div>
-                            <label class="sr-only" for="inlineFormInputGroupUsername1"></label>
+                            <label asp-for="Name" class="sr-only" for="inlineFormInputGroupUsername1"></label>
                         </div>
 
-                        <input type="text" class="form-control" id="inlineFormInputGroupUsername1">
+                        <input asp-for="Name" type="text" class="form-control" id="inlineFormInputGroupUsername1">
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
-                    <div class="input-group mb-4 mr-sm-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Display Name</div>
-                            <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
-                        </div>
-
-                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2">
-                    </div>
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Email</div>
-                            <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
+                            <label asp-for="Email" class="sr-only" for="inlineFormInputGroupUsername2"></label>
                         </div>
 
-                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2">
+                        <input asp-for="Email" type="text" class="form-control" id="inlineFormInputGroupUsername2">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <div class="input-group mb-4 mr-sm-2">
@@ -53,7 +47,7 @@
                         <span asp-validation-for="PEndDate" class="text-danger"></span>
 
                     </div>
-                    <button type="button" class="btn btn-action btn-sm px-2" onclick="" style="float: right">Save</button>
+                    <button type="submit" class="btn btn-action btn-sm px-2" style="float: right">Save</button>
                 </form>
             </div>
         </div>

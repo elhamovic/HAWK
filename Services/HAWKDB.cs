@@ -41,13 +41,11 @@ namespace HAWK_v.Services
 
         public bool DeleteTemp(int id)
         {
-            userDAO.DeleteTemp(id);
-            return true;
+            return userDAO.DeleteTemp(id);
         }
-        public bool UpdateTemp(int id, string PSdate, string PEdate)
+        public bool UpdateTemp(TempModel temp)
         {
-            userDAO.UpdateTemp(id, PSdate, PEdate);
-            return true;
+            return userDAO.UpdateTemp(temp.Id, temp.PStartDate, temp.PEndDate);
         }
         public bool AddTemp(TempModel temp)
         {
