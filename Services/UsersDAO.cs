@@ -81,15 +81,17 @@ namespace HAWK_v.Services
                 return true;
             }
         }
-        public bool UpdateTemp(int id, string PSdate, string PEdate)
+        public bool UpdateTemp(int id, string PSdate, string PEdate, string Name, string Email)
         {
-            string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate WHERE Id = @id";
+            string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate, Name = @name, Email = @email WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
                 command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
                 command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
                 command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = Name;
+                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = Email;
                 try
                 {
                     connection.Open();
@@ -163,7 +165,7 @@ namespace HAWK_v.Services
         public TempModel SelectTemp(int id)
         {
             TempModel temp = new TempModel();
-            string sqlStatment = "SELECT * FROM [dbo].[TempUser] WHERE UserName = @id";
+            string sqlStatment = "SELECT * FROM [dbo].[TempUser] WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
@@ -174,6 +176,7 @@ namespace HAWK_v.Services
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
+                            reader.Read();
                             temp.Id = (int)(reader["Id"]);
                             temp.PStartDate = (string)(reader["PermissionStartDate"]);
                             temp.PEndDate = (string)(reader["PermissionEndDate"]);

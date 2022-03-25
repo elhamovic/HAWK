@@ -45,7 +45,7 @@ namespace HAWK_v.Services
         }
         public bool UpdateTemp(TempModel temp)
         {
-            return userDAO.UpdateTemp(temp.Id, temp.PStartDate, temp.PEndDate);
+            return userDAO.UpdateTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
         }
         public bool AddTemp(TempModel temp)
         {
