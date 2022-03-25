@@ -53,6 +53,7 @@ namespace HAWK_v.Controllers
 
         public IActionResult DeleteTempToDB(int id)
         {
+            
             hdb.DeleteTemp(id);
             // add smartface
             return View("TempUser", hdb.GetAllTemp());
