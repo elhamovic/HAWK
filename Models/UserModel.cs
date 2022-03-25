@@ -19,6 +19,7 @@ namespace HAWK_v.Models
         [DisplayName("Upload Face Image:")]
         public string Image { get; set; }
         public string Role { get; set; }
-        //zft name
+        public string Name { get; set; }
+        public int Dno { get; set; }
     }
 }

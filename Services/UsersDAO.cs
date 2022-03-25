@@ -36,7 +36,7 @@ namespace HAWK_v.Services
                     Console.WriteLine(e.Message);
                 }
                 string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                string sqlStatment2 = "SELECT Role FROM [dbo].[Users] WHERE Id = @id";
+                string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
                 using (SqlConnection connection2 = new SqlConnection(connectionString2))
                 {
                     try
@@ -50,6 +50,8 @@ namespace HAWK_v.Services
                         {
                             reader.Read();
                             user.Role = (string)(reader["Role"]);
+                            user.Dno = (int)(reader["Dno"]);
+                            user.Name = (string)(reader["Name"]);
                             success = true;
                         }
                     }
@@ -206,13 +208,12 @@ namespace HAWK_v.Services
                     if (reader.HasRows)
                     {
                         Users = new List<UserModel>();
-                        //reader.Read();
                         while (reader.Read() != false)
                         {
                             UserModel user = new UserModel();
                             user.Id = (int)(reader["Id"]);
-
-
+                            user.Name = (string)(reader["Name"]);
+                            user.Role = (string)(reader["Role"]);
                             Users.Add(user);
                         }
 
