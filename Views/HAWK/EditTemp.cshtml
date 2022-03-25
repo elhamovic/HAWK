@@ -7,6 +7,7 @@
         <div class=" white-block bg-white tm-block h-100">
             <div class="Camera-form">
                 <form asp-action="EditTempToDB">
+                    <input asp-for="Id" type="text" value="@Model.Id" style="display: none">
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Full Name</div>
