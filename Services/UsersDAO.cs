@@ -64,7 +64,7 @@ namespace HAWK_v.Services
 
         public bool DeleteTemp(int id)
         {
-            string sqlStatment = "DELETE FROM [dbo].[TempUser] WHERE condition Id = @id";
+            string sqlStatment = "DELETE FROM [dbo].[TempUser] WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
