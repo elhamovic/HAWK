@@ -51,7 +51,7 @@
                                 @Html.DisplayFor(modelItem => item.PEndDate)
                             </td>
                             <td>
-                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" role="button">
+                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" asp-route-id= "@item.Id"  role="button">
                                     <i class='fas fa-edit' style='font-size:16px'></i>
                                 </a>
                             </td>

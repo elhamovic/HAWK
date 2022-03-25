@@ -10,7 +10,8 @@ namespace HAWK_v.Services
     public class UsersDAO
     {
         string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        List<TempModel> Users;
+        List<TempModel> TempUsers;
+        List<UserModel> Users;
         public bool searchDB(UserModel user)
         {
             bool success = false;
@@ -136,7 +137,7 @@ namespace HAWK_v.Services
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        Users = new List<TempModel>();
+                        TempUsers = new List<TempModel>();
                         //reader.Read();
                         while (reader.Read() != false)
                         {
@@ -147,7 +148,7 @@ namespace HAWK_v.Services
                             temp.Name = (string)(reader["Name"]);
                             temp.Email = (string)(reader["Email"]);
 
-                            Users.Add(temp);
+                            TempUsers.Add(temp);
                         }
                         
                     }
@@ -156,7 +157,7 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                return Users;
+                return TempUsers;
             }
         }
         public TempModel SelectTemp(int id)
@@ -185,6 +186,40 @@ namespace HAWK_v.Services
                     Console.WriteLine(e.Message);
                 }
                 return temp;
+            }
+        }
+        public List<UserModel> GetDepartmentEmps(int Dno)
+        {
+            string sqlStatment = "SELECT * FROM [dbo].[Users] WHERE Dno = @dno ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = Dno;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        Users = new List<UserModel>();
+                        //reader.Read();
+                        while (reader.Read() != false)
+                        {
+                            UserModel user = new UserModel();
+                            user.Id = (int)(reader["Id"]);
+
+
+                            Users.Add(user);
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return Users;
             }
         }
     }

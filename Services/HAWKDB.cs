@@ -63,5 +63,9 @@ namespace HAWK_v.Services
         {
             return userDAO.SelectTemp(id);
         }
+       // public List<UserModel> GetDepartmentEmps()
+        //{
+          //  return true;
+        //}
     }
 }

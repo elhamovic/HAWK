@@ -44,6 +44,7 @@ namespace HAWK_v.Controllers
             // add smartface
             return View("TempUser", hdb.GetAllTemp());
         }
+        [Route("HAWK/EditTemp/{id?}")]  
         public IActionResult EditTemp(int id)
         {
             return View(hdb.GetTemp(id));
