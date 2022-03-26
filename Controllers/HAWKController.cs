@@ -12,7 +12,6 @@ namespace HAWK_v.Controllers
     {
         HAWKDB hdb = new HAWKDB();
         HRDB hrdh = new HRDB();
-        int dno;
         public IActionResult Index()
         {
 
@@ -22,8 +21,10 @@ namespace HAWK_v.Controllers
         {
             return View();
         }
-        public IActionResult Department()
+        [Route("HAWK/Department/{dno?}")]
+        public IActionResult Department(int dno)
         {
+            Console.WriteLine(dno);
             return View(hdb.GetDepartmentEmps(dno));
         }
         public IActionResult TempUser()
@@ -66,7 +67,6 @@ namespace HAWK_v.Controllers
             {
                 if (hdb.isManager(userModel))
                 {
-                    dno = userModel.Dno;
                     return View("Manager", userModel);
                 }
                 else if (hdb.isAdmin(userModel))
