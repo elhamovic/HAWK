@@ -28,23 +28,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-
-                    </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Shahad</td>
-                        <td>Shahad@gmail.com</td>
-                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role)
+                            </td>
+                           
+                         
+                            <td>
+                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id="@item.Id" role="button">
+                                    <i class='fas fa-trash' style='font-size:16px'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
