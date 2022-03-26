@@ -1,6 +1,7 @@
 ﻿@model HAWK_v.Models.UserModel
- 
-
+@{
+    ViewData["x"] = Model.Dno;
+        }
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
         <h2>
@@ -53,4 +54,4 @@
         <iframe title="HAWK-Analysis" width="700" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiZTU2Njk2ODMtZGUxNC00MDMxLTkxOWEtYjMyMDU0YjJjNDEwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection?filter=Users/Dno eq 2" frameborder="0" allowFullScreen="true"></iframe>
 
     </div>
-    </div>
+</div>

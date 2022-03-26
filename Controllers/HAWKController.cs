@@ -12,7 +12,6 @@ namespace HAWK_v.Controllers
     {
         HAWKDB hdb = new HAWKDB();
         HRDB hrdh = new HRDB();
-
         public IActionResult Index()
         {
 
@@ -20,17 +19,16 @@ namespace HAWK_v.Controllers
         }
         public IActionResult Manager()
         {
-
             return View();
         }
-        public IActionResult Department()
+        [Route("HAWK/Department/{dno?}")]
+        public IActionResult Department(int dno)
         {
-
-            return View();
+            Console.WriteLine(dno);
+            return View(hdb.GetDepartmentEmps(dno));
         }
         public IActionResult TempUser()
-        {
-            
+        {     
             return View(hdb.GetAllTemp());
         }
         public IActionResult AddTemp()
@@ -53,7 +51,6 @@ namespace HAWK_v.Controllers
 
         public IActionResult DeleteTempToDB(int id)
         {
-            
             hdb.DeleteTemp(id);
             // add smartface
             return View("TempUser", hdb.GetAllTemp());
