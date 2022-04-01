@@ -67,5 +67,9 @@ namespace HAWK_v.Services
         {
             return userDAO.GetDepartmentEmps(Dno);
         }
+        public List<string> GetAttendnce(int id)
+        {
+            return userDAO.GetAttendance(id);
+        }
     }
 }

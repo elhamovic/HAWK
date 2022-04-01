@@ -226,5 +226,30 @@ namespace HAWK_v.Services
                 return Users;
             }
         }
+        public List<string> GetAttendance(int id)
+        {
+            List<string> AttendanceList = new List<string>(); ;
+            string sqlStatment = "SELECT * FROM [dbo].[Attendance] WHERE Id = @id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read() != false)
+                    {
+                        string attendance = (string)reader["EnterTime"] + "," + reader["EnterDate"] + "," + reader["ExitTime"] + "," + reader["ExitDate"];
+                        AttendanceList.Add(attendance);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return AttendanceList;
+            }
+        }
     }
 }
