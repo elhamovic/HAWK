@@ -21,28 +21,31 @@
             <table class="table table-striped mt-4">
                 <thead>
                     <tr class="tm-bg-gray">
+                        <th>Date</th>
                         <th>Time In</th>
                         <th>Time Out</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>8:30</td>
-                        <td>12:00</td>
-                    </tr>
-                    <tr>
-                        <td>8:30</td>
-                        <td>12:00</td>
-                    </tr>
-                    <tr>
-                        <td>8:30</td>
-                        <td>12:00</td>
-                    </tr>
-                    <tr>
-                        <td>8:30</td>
-                        <td>12:00</td>
-                    </tr>
-                </tbody>
+                    @{
+                        foreach (string Attendnce in ViewBag.Attendnce)
+                        {
+                            string[] x = Attendnce.Split(',');
+                                        <tr>
+                                            <td>
+                                                @x[3]
+                                            </td>
+                                            <td>
+                                                @x[0]
+                                            </td>
+                                            <td>
+                                                @x[2]
+                                            </td>
+                                        </tr>
+                                    }
+                        }
+
+                    </tbody>
             </table>
         </div>
 

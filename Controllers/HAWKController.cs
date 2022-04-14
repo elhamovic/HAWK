@@ -27,6 +27,7 @@ namespace HAWK_v.Controllers
             Console.WriteLine(dno);
             return View(hdb.GetDepartmentEmps(dno));
         }
+
         public IActionResult TempUser()
         {     
             return View(hdb.GetAllTemp());
@@ -67,6 +68,8 @@ namespace HAWK_v.Controllers
             {
                 if (hdb.isManager(userModel))
                 {
+                    ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
+
                     return View("Manager", userModel);
                 }
                 else if (hdb.isAdmin(userModel))
@@ -74,8 +77,9 @@ namespace HAWK_v.Controllers
                     // smartface controller
                     return View("EmployeeMain", userModel);
                 }
-                else { 
-                
+                else {
+                    ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
+
                     return View("EmployeeMain", userModel);
                 }
             }
