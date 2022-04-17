@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<HAWK_v.Models.TempModel>
+@{
+       ViewBag.MangDno = Model.ElementAt(0).Dno;
+}
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
         <h2>
@@ -22,7 +25,7 @@
                 </button>
             </a>
             <br />
-            <table  style="overflow:scroll" class="table table-striped mt-4">
+            <table style="overflow:scroll" class="table table-striped mt-4">
                 <thead>
                     <tr class="tm-bg-gray">
                         <th>Name</th>
@@ -35,34 +38,46 @@
 
                 </thead>
                 <tbody id="dataTable">
-                        @foreach (var item in Model)
+                    @{
+                        try
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PStartDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PEndDate)
-                            </td>
-                            <td>
-                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" asp-route-id= "@item.Id"  role="button">
-                                    <i class='fas fa-edit' style='font-size:16px'></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id= "@item.Id"  role="button">
-                                    <i class='fas fa-trash' style='font-size:16px'></i>
-                                </a>
-                            </td>
-                        </tr>
+
+                            @foreach (var item in Model)
+                            {
+                    if (item.Id != 0) { 
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PStartDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PEndDate)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" asp-route-id="@item.Id" role="button">
+                                            <i class='fas fa-edit' style='font-size:16px'></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id="@item.Id" role="button">
+                                            <i class='fas fa-trash' style='font-size:16px'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
                     }
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>

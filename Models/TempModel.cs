@@ -16,5 +16,6 @@ namespace HAWK_v.Models
         public string PEndDate { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public int Dno { get; set; }
     }
 }

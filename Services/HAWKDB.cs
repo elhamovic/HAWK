@@ -45,19 +45,19 @@ namespace HAWK_v.Services
         }
         public bool UpdateTemp(TempModel temp)
         {
-            return userDAO.UpdateTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
+            return userDAO.UpdateTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email, temp.Dno);
         }
         public bool AddTemp(TempModel temp)
         {
             Random rnd = new Random();
             int num = rnd.Next();
             temp.Id = num;
-            userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email);
+            userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email, temp.Dno);
             return true;
         }
-        public List<TempModel> GetAllTemp() // list for manager
+        public List<TempModel> GetAllTemp(int Dno) // list for manager
         {
-            return userDAO.SelectAllTemp();
+            return userDAO.SelectAllTemp(Dno);
         }
         public TempModel GetTemp(int id) //for update
         {
@@ -70,6 +70,10 @@ namespace HAWK_v.Services
         public List<string> GetAttendnce(int id)
         {
             return userDAO.GetAttendance(id);
+        }
+        public UserModel GetManager(int Dno)
+        {
+            return userDAO.SelectManager(Dno);
         }
     }
 }

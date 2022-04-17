@@ -21,5 +21,6 @@ namespace HAWK_v.Models
         public string Role { get; set; }
         public string Name { get; set; }
         public int Dno { get; set; }
+        public string Email { get; set; }
     }
 }

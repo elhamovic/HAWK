@@ -36,9 +36,32 @@
         </div>
     </div>
 </div>
+<script>
+    function Authentacate() {
+        var username = document.getElementById("username").value.trim();
+        var password = document.getElementById("password").value.trim();
+        let data = { username: username, password: password };
+        let r = fetch("https://localhost:5001/Smartface/authenticate", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(res => {
+                if (res !== null) {
+                    var bearer = 'Bearer ' + res.token;
+                    sessionStorage.setItem("userT", bearer);
+                } else {
+                    alert("Wrong username or password");
+                }
 
+            }
+            )
 
-
+    }
+    
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

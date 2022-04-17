@@ -27,17 +27,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="Manager">
+                            <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="Manager" asp-route-dno="@ViewBag.MangDno">
                                 MyAttendance <span class="sr-only">(current)</span>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="Department" asp-route-dno="@ViewData["x"]">Department</a>
-</li>
+                            <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="Department" asp-route-dno="@ViewBag.MangDno">Department</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="TempUser">TempUser</a>
+                            <a class="nav-link" asp-area="" asp-controller="HAWK" asp-action="TempUser" asp-route-dno="@ViewBag.MangDno">TempUser</a>
                         </li>
 
 

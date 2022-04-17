@@ -14,34 +14,34 @@ namespace HAWK_v.Controllers
         HRDB hrdh = new HRDB();
         public IActionResult Index()
         {
-
             return View();
         }
-        public IActionResult Manager()
+        [Route("HAWK/Manager/{dno?}")]
+        public IActionResult Manager(int dno)
         {
-            return View();
+            ViewBag.Attendnce = hdb.GetAttendnce(hdb.GetManager(dno).Id);
+            return View(hdb.GetManager(dno));
         }
         [Route("HAWK/Department/{dno?}")]
         public IActionResult Department(int dno)
         {
-            Console.WriteLine(dno);
             return View(hdb.GetDepartmentEmps(dno));
         }
-
-        public IActionResult TempUser()
-        {     
-            return View(hdb.GetAllTemp());
+        [Route("HAWK/TempUser/{dno?}")]
+        public IActionResult TempUser(int dno)
+        {
+            //ViewBag.MangDno = dno;
+            return View(hdb.GetAllTemp(dno));
         }
         public IActionResult AddTemp()
         {
-
             return View();
         }
         public IActionResult AddTempToDB(TempModel temp)
         {
             hdb.AddTemp(temp);
             // add smartface
-            return View("TempUser", hdb.GetAllTemp());
+            return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
         [Route("HAWK/EditTemp/{id?}")]  
         public IActionResult EditTemp(int id)
@@ -54,13 +54,13 @@ namespace HAWK_v.Controllers
         {
             hdb.DeleteTemp(id);
             // add smartface
-            return View("TempUser", hdb.GetAllTemp());
+            return View("TempUser", hdb.GetAllTemp(hdb.GetTemp(id).Dno));
         }
         public IActionResult EditTempToDB(TempModel temp)
         {
             hdb.UpdateTemp(temp);
             // add smartface
-            return View("TempUser", hdb.GetAllTemp());
+            return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
         public IActionResult DBLogin(UserModel userModel)
         {
@@ -68,7 +68,8 @@ namespace HAWK_v.Controllers
             {
                 if (hdb.isManager(userModel))
                 {
-                    ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
+                    ViewBag.Attendnce=  hdb.GetAttendnce(userModel.Id);
+                    ViewBag.MangDno= userModel.Dno;
 
                     return View("Manager", userModel);
                 }
@@ -100,6 +101,7 @@ namespace HAWK_v.Controllers
                 //add smartface
                 if (hdb.isManager(user))
                 {
+                    ViewBag.Attendnce = hdb.GetAttendnce(user.Id);
                     return View("Manager", user);
                 }
                 else if (hdb.isAdmin(user))
@@ -108,6 +110,7 @@ namespace HAWK_v.Controllers
                 }
                 else
                 {
+                    ViewBag.Attendnce = hdb.GetAttendnce(user.Id);
                     return View("EmployeeMain", user);
                 }
             }

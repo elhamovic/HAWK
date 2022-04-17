@@ -31,6 +31,16 @@
                     </div>
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
+                            <div class="input-group-text">Department number</div>
+                            <label asp-for="Dno" class="sr-only" for="inlineFormInputGroupUsername2"></label>
+                        </div>
+
+                        <input asp-for="Dno" type="text" class="form-control" id="inlineFormInputGroupUsername2">
+                        <span asp-validation-for="Dno" class="text-danger"></span>
+
+                    </div>
+                    <div class="input-group mb-4 mr-sm-2">
+                        <div class="input-group-prepend">
                             <div class="input-group-text">Permission Start Date</div>
                             <label asp-for="PStartDate" class="sr-only" for="inlineFormInputGroupUsername2"></label>
                         </div>
