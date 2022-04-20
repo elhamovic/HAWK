@@ -75,8 +75,8 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(userModel))
                 {
-                    // smartface controller
-                    return View("EmployeeMain", userModel);
+                    return Redirect("http://localhost:1234/SomeController/SoneAction");
+                   // return View("EmployeeMain", userModel);
                 }
                 else {
                     ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
