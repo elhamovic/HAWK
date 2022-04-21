@@ -75,7 +75,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(userModel))
                 {
-                    return Redirect("http://localhost:1234/SomeController/SoneAction");
+                    return Redirect("http://localhost:63342/SmartfaceSolution/SmartfaceSolution/Front/HomePage.html");
                    // return View("EmployeeMain", userModel);
                 }
                 else {

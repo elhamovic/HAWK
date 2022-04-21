@@ -9,28 +9,32 @@ namespace HAWK_v.Helpers
 {
     public class SmartfaceRequest
     {
-        private string serverName = "http://localhost:8098/api/v1/";
+        private string serverName = "https://localhost:5001/Smartface/";
+        private string Token;
+        public SmartfaceRequest() { }
+        public SmartfaceRequest(string token){ 
+            this.Token = token;
+        }
 
-        public async Task<string> requestNoBody(string reqUrl, string methodType)
+        public string requestNoBody(string reqUrl, string methodType)
         {
             string res = null;
-            await Task.Run(async () =>
-            {
+            
                 var httpWebRequest =
                     (HttpWebRequest)WebRequest.Create(serverName + reqUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = methodType;
+                httpWebRequest.Headers.Add("Authorization", "Bearer " + Token);
                 var response = (HttpWebResponse)httpWebRequest.GetResponse();
                 res = new StreamReader((response).GetResponseStream()) .ReadToEnd();
-            });
+            
             return res;
         }
 
-        public async Task<string> requestWithBody(string reqUrl, string methodType, string json)
+        public  string requestWithBody(string reqUrl, string methodType, string json)
         {
             string res = null;
-            await Task.Run(async () =>
-            {
+            
                 var httpWebRequest =
                     (HttpWebRequest)WebRequest.Create(serverName + reqUrl);
                 httpWebRequest.ContentType = "application/json";
@@ -51,7 +55,7 @@ namespace HAWK_v.Helpers
 
                 var response = (HttpWebResponse)httpWebRequest.GetResponse();
                 res = res = new StreamReader((response).GetResponseStream()).ReadToEnd();
-            });
+            
             return res;
         }
     }

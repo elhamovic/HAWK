@@ -5,17 +5,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using HAWK_v.Helpers;
+using HAWK_v.helpers;
+using System.Text.Json;
 
 namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         List<TempModel> TempUsers;
         List<UserModel> Users;
         private string token = "";
-        private UserModel theUser = new UserModel();
-        private TempModel theTemp = new TempModel();
         public bool searchDB(UserModel user)
         {
             bool success = false;
@@ -23,8 +23,8 @@ namespace HAWK_v.Services
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
-                command.Parameters.Add("@username", System.Data.SqlDbType.VarChar, -1).Value = theUser.UserName = user.UserName;
-                command.Parameters.Add("@password", System.Data.SqlDbType.VarChar, -1).Value = theUser.Password = user.Password;
+                command.Parameters.Add("@username", System.Data.SqlDbType.VarChar, -1).Value  = user.UserName;
+                command.Parameters.Add("@password", System.Data.SqlDbType.VarChar, -1).Value  = user.Password;
                 try
                 {
                     connection.Open();
@@ -32,14 +32,14 @@ namespace HAWK_v.Services
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        user.Id = theUser.Id = (int)(reader["Id"]);
+                        user.Id =  (int)(reader["Id"]);
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string connectionString2 = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
                 using (SqlConnection connection2 = new SqlConnection(connectionString2))
                 {
@@ -53,10 +53,10 @@ namespace HAWK_v.Services
                         if (reader.HasRows)
                         {
                             reader.Read();
-                            user.Role = theUser.Role = (string)(reader["Role"]);
-                            user.Dno = theUser.Dno = (int)(reader["Dno"]);
-                            user.Name = theUser.Name = (string)(reader["Name"]);
-                            user.Email = theUser.Email = (string)(reader["Email"]);
+                            user.Role =  (string)(reader["Role"]);
+                            user.Dno =  (int)(reader["Dno"]);
+                            user.Name =  (string)(reader["Name"]);
+                            user.Email = (string)(reader["Email"]);
                             success = true;
                         }
                     }
@@ -80,11 +80,14 @@ namespace HAWK_v.Services
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+                    setToken(SelectManager(3));
+                    new SmartfaceRequest(token).requestNoBody("WatchlistMember/delete?id=" + id, "DELETE");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
+                
                 return true;
             }
         }
@@ -104,6 +107,8 @@ namespace HAWK_v.Services
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+                    string json = "{\"id\":\"" + id + "\",\"fullName\":\"" + Name + "\",\"displayName\":\"" + Name + "\",\"note\":\"" + Email+", ,"+ id+ "\"}";
+                    new SmartfaceRequest(token).requestWithBody("WatchlistMember/update", "POST", null);
                 }
                 catch (Exception e)
                 {
@@ -128,6 +133,10 @@ namespace HAWK_v.Services
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+
+                    setToken(SelectManager(Dno));
+                    new SmartfaceRequest(token).requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + Name + "&fullName=" + Name + "&note=" + Email + "," + " "+ "," + id +
+                         "&watchlistId=b1af7331-7cbf-4335-b682-d32bb18541e7&imgUrl=C://SmartFaceImages//Mom.png", "POST");
                 }
                 catch (Exception e)
                 {
@@ -192,11 +201,11 @@ namespace HAWK_v.Services
                     if (reader.HasRows)
                     {
                             reader.Read();
-                            temp.Id = theTemp.Id = (int)(reader["Id"]);
-                            temp.PStartDate = theTemp.PStartDate = (string)(reader["PermissionStartDate"]);
-                            temp.PEndDate = theTemp.PEndDate = (string)(reader["PermissionEndDate"]);
-                            temp.Name = theTemp.Name = (string)(reader["Name"]);
-                            temp.Email = theTemp.Email = (string)(reader["Email"]);
+                            temp.Id = (int)(reader["Id"]);
+                            temp.PStartDate  = (string)(reader["PermissionStartDate"]);
+                            temp.PEndDate = (string)(reader["PermissionEndDate"]);
+                            temp.Name  = (string)(reader["Name"]);
+                            temp.Email  = (string)(reader["Email"]);
                             temp.Dno = (int)(reader["Dno"]);
                     }
                 }
@@ -268,8 +277,30 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                return user;
+
             }
+             sqlStatment = "SELECT * FROM [dbo].[Employees] WHERE Id = @id ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        user.Password = (string)(reader["Password"]);
+                        user.UserName = (string)(reader["UserName"]);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+                return user;
         }
         public List<string> GetAttendance(int id)
         {
@@ -296,10 +327,20 @@ namespace HAWK_v.Services
                 return AttendanceList;
             }
         }
-      /*  public void auth()
+        private async void setToken(UserModel user)
         {
-            var user = {userName:}
-            new SmartfaceRequest().requestWithBody("authenticate", "POST",);
-        }*/
+            try
+            {
+                string json = "{\"username\":\"" + user.UserName + "\",\"password\":\"" + user.Password + "\"}";
+                AuthenticateResponse response = JsonSerializer.Deserialize<AuthenticateResponse>(new SmartfaceRequest().requestWithBody("authenticate", "POST", json));
+
+                token = response.token;
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
     }
 }
