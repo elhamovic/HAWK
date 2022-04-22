@@ -149,8 +149,10 @@ namespace HAWK_v.Services
                     command.ExecuteNonQuery();
 
                     setToken(SelectManager(Dno));
-                    new SmartfaceRequest(token).requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + Name + "&fullName=" + Name + "&note=" + Email + "," + " "+ "," + id +
-                         "&watchlistId=b1af7331-7cbf-4335-b682-d32bb18541e7&imgUrl=C://SmartFaceImages//Mom.png", "POST");
+                    SmartfaceRequest request = new SmartfaceRequest(token);
+                    Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + Dno, "GET"));
+                    request.requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + Name + "&fullName=" + Name + "&note=" + Email + "," + " " + "," + id +
+                         "&watchlistId=" + watchlist.id + "&imgUrl=C://SmartFaceImages//Mom.png", "POST");
                 }
                 catch (Exception e)
                 {
