@@ -19,7 +19,7 @@ namespace HAWK_v.Services
         string token;
         public  bool SearchEmployee(UserModel user)
         {
-            List<string> userInfo = new List<string>();
+            string phonenumber = "";
             bool x = false;
             string sqlStatment = "SELECT * FROM [dbo].[Employees] WHERE UserName = @username AND Password = @password";
             string sqlStatment2 = "INSERT INTO [dbo].[Users] ([Id], [Name] ,[PhoneNumber] ,[Role] ,[Dno],[Email]) VALUES (@id ,@name ,@phone ,@role ,@dno,@email)";
@@ -38,14 +38,10 @@ namespace HAWK_v.Services
                         reader.Read();
                         user.Id = (int)(reader["Id"]);
                         user.Role = (string)(reader["Role"]);
-                        userInfo.Add(String.Format("{0}", reader["Id"]));
-                        userInfo.Add(String.Format("{0}", reader["Name"]));
-                        userInfo.Add(String.Format("{0}", reader["PhoneNumber"]));
-                        userInfo.Add(String.Format("{0}", reader["Role"]));
-                        userInfo.Add(String.Format("{0}", reader["Dno"]));
-                        userInfo.Add(String.Format("{0}", reader["Email"]));
-                        userInfo.Add(String.Format("{0}", reader["UserName"]));
-                        userInfo.Add(String.Format("{0}", reader["Password"]));
+                        user.Dno = (int)(reader["Dno"]);
+                        user.Name = (string)(reader["Name"]);
+                        user.Email = (string)(reader["Email"]);
+                        phonenumber = (string)reader["PhoneNumber"];
                     }
                 }
                 catch (Exception e)
@@ -59,13 +55,13 @@ namespace HAWK_v.Services
                 try
                 {
 
-                    SqlCommand command = new SqlCommand(sqlStatment2, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = userInfo[0];
-                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = userInfo[1];
-                command.Parameters.Add("@phone", System.Data.SqlDbType.VarChar, -1).Value = userInfo[2];
-                command.Parameters.Add("@role", System.Data.SqlDbType.VarChar, -1).Value = userInfo[3];
-                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = userInfo[4];
-                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = userInfo[5];
+                SqlCommand command = new SqlCommand(sqlStatment2, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = user.Name;
+                command.Parameters.Add("@phone", System.Data.SqlDbType.VarChar, -1).Value = phonenumber;
+                command.Parameters.Add("@role", System.Data.SqlDbType.VarChar, -1).Value = user.Role;
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = user.Dno;
+                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = user.Email;
                     connection.Open();
                     command.ExecuteNonQuery();
                     
@@ -83,15 +79,15 @@ namespace HAWK_v.Services
                 try
                 {
                     SqlCommand command = new SqlCommand(sqlStatment3, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = userInfo[0];
-                command.Parameters.Add("@username", System.Data.SqlDbType.VarChar, -1).Value = userInfo[6];
-                command.Parameters.Add("@password", System.Data.SqlDbType.VarChar, -1).Value = userInfo[7];
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
+                command.Parameters.Add("@username", System.Data.SqlDbType.VarChar, -1).Value = user.UserName;
+                command.Parameters.Add("@password", System.Data.SqlDbType.VarChar, -1).Value = user.Password;
                 
                     connection.Open();
                     command.ExecuteNonQuery();
                     x = true;
                     setToken(user);
-                   new SmartfaceRequest(token).requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + userInfo[1] + "&fullName=" + userInfo[1] + "&note=" + userInfo[5] + "," + userInfo[2] + "," + userInfo[0] +
+                   new SmartfaceRequest(token).requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + user.Name + "&fullName=" + user.Name + "&note=" + user.Email + "," + phonenumber + "," + user.Id +
                         "&watchlistId=b1af7331-7cbf-4335-b682-d32bb18541e7&imgUrl=C://SmartFaceImages//Mom.png", "POST");
                 }
                 catch (Exception e)

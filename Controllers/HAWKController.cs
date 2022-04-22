@@ -96,10 +96,10 @@ namespace HAWK_v.Controllers
         {
             if (hrdh.Exist(user) != false)
             {
-                //add smartface
                 if (hdb.isManager(user))
                 {
                     ViewBag.Attendnce = hdb.GetAttendnce(user.Id);
+                    ViewBag.MangDno = user.Dno;
                     return View("Manager", user);
                 }
                 else if (hdb.isAdmin(user))
