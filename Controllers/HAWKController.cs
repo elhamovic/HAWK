@@ -30,17 +30,17 @@ namespace HAWK_v.Controllers
         [Route("HAWK/TempUser/{dno?}")]
         public IActionResult TempUser(int dno)
         {
-            //ViewBag.MangDno = dno;
             return View(hdb.GetAllTemp(dno));
         }
-        public IActionResult AddTemp()
+        [Route("HAWK/AddTemp/{dno?}")]
+        public IActionResult AddTemp(int dno)
         {
+            ViewBag.tempDno = dno;
             return View();
         }
         public IActionResult AddTempToDB(TempModel temp)
         {
             hdb.AddTemp(temp);
-            // add smartface
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
         [Route("HAWK/EditTemp/{id?}")]  
@@ -52,14 +52,13 @@ namespace HAWK_v.Controllers
 
         public IActionResult DeleteTempToDB(int id)
         {
+            int depnum = hdb.GetTemp(id).Dno;
             hdb.DeleteTemp(id);
-            // add smartface
-            return View("TempUser", hdb.GetAllTemp(hdb.GetTemp(id).Dno));
+            return View("TempUser", hdb.GetAllTemp(depnum));
         }
         public IActionResult EditTempToDB(TempModel temp)
         {
             hdb.UpdateTemp(temp);
-            // add smartface
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
         public IActionResult DBLogin(UserModel userModel)
@@ -75,8 +74,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(userModel))
                 {
-                    return Redirect("http://localhost:63342/SmartfaceSolution/SmartfaceSolution/Front/HomePage.html");
-                   // return View("EmployeeMain", userModel);
+                    return Redirect("http://localhost:63342/SmartfaceSolution/Front/HomePage.html");
                 }
                 else {
                     ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
@@ -106,7 +104,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(user))
                 {
-                    return View("EmployeeMain", user);
+                    return Redirect("http://localhost:63342/SmartfaceSolution/Front/HomePage.html");
                 }
                 else
                 {

@@ -12,7 +12,7 @@ namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         List<TempModel> TempUsers;
         List<UserModel> Users;
         private string token = "";
@@ -39,7 +39,7 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
                 using (SqlConnection connection2 = new SqlConnection(connectionString2))
                 {
@@ -87,9 +87,23 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                
-                return true;
+             }
+             sqlStatment = "DELETE FROM [dbo].[SmartfaceLink] WHERE EmpId = @id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
+            return true;
         }
         public bool UpdateTemp(int id, string PSdate, string PEdate, string Name, string Email, int Dno)
         {

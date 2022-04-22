@@ -19,7 +19,7 @@
     <div class="col-8">
         <!-- <br />-->
         <div class="table-responsive">
-            <a asp-area="" asp-controller="HAWK" asp-action="AddTemp">
+            <a asp-area="" asp-controller="HAWK" asp-action="AddTemp" asp-route-dno="@Model.ElementAt(0).Dno">
                 <button type="button" class="btn btn-dark" style="float: right">
                     <i class="fas fa-plus"></i>
                 </button>
