@@ -9,13 +9,14 @@ namespace HAWK_v.Models
 {
     public class UserModel
     {
-       
        public int Id { get; set; }
         [Required]
         [DisplayName("Username:")]
         public string UserName { get; set; }
+        [Required]
         [DisplayName("Password:")]
         public string Password { get; set; }
+        [Required]
         [DisplayName("Upload Face Image:")]
         public string Image { get; set; }
         public string Role { get; set; }
