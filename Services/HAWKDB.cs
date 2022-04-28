@@ -52,7 +52,7 @@ namespace HAWK_v.Services
             Random rnd = new Random();
             int num = rnd.Next();
             temp.Id = num;
-            userDAO.AddTemp(temp.Id, temp.PStartDate, temp.PEndDate, temp.Name, temp.Email, temp.Dno);
+            userDAO.AddTemp(temp);
             return true;
         }
         public List<TempModel> GetAllTemp(int Dno) // list for manager

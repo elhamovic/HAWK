@@ -3,8 +3,11 @@ using HAWK_v.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HAWK_v.Controllers
 {
@@ -38,8 +41,18 @@ namespace HAWK_v.Controllers
             ViewBag.tempDno = dno;
             return View();
         }
+        [HttpPost("AddTempToDB")]
         public IActionResult AddTempToDB(TempModel temp)
         {
+            if (temp.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    temp.Image.CopyToAsync(memoryStream);
+                    temp.ImageData = Convert.ToBase64String(memoryStream.ToArray());
+
+                }
+            }
             hdb.AddTemp(temp);
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
@@ -92,8 +105,19 @@ namespace HAWK_v.Controllers
             return View();
 
         }
+        [HttpPost("EmployeeMain")]
         public IActionResult EmployeeMain(UserModel user)
         {
+
+            if (user.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    user.Image.CopyToAsync(memoryStream);
+                    user.ImageData = Convert.ToBase64String(memoryStream.ToArray());
+                   
+                }
+            }
             if (hrdh.Exist(user) != false)
             {
                 if (hdb.isManager(user))

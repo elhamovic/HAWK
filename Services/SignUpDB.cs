@@ -14,8 +14,8 @@ namespace HAWK_v.Services
 {
     public class SignUpDB
     {
-        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWKSYS;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HR;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString2 = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         string token;
         public  bool SearchEmployee(UserModel user)
         {
@@ -89,8 +89,8 @@ namespace HAWK_v.Services
                     setToken(user);
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + user.Dno, "GET"));
-                    request.requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + user.Name + "&fullName=" + user.Name + "&note=" + user.Email + "," + phonenumber + "," + user.Id +
-                        "&watchlistId=" + watchlist.id + "&imgUrl=C://SmartFaceImages//Mom.png", "POST");
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + user.Name + "\",\"fullName\": \"" + user.Name + "\",\"note\":\"" + user.Email + "," + phonenumber + "," + user.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + user.ImageData + "\"}";
+                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST",json);
                 }
                 catch (Exception e)
                 {

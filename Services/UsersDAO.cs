@@ -12,7 +12,7 @@ namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         List<TempModel> TempUsers;
         List<UserModel> Users;
         private string token = "";
@@ -39,7 +39,7 @@ namespace HAWK_v.Services
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string connectionString2 = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
                 using (SqlConnection connection2 = new SqlConnection(connectionString2))
                 {
@@ -131,28 +131,28 @@ namespace HAWK_v.Services
                 return true;
             }
         }
-        public bool AddTemp(int id, string PSdate, string PEdate, string Name, string Email, int Dno)
+        public bool AddTemp(TempModel temp)
         {
             string sqlStatment = "INSERT INTO [dbo].[TempUser] (Id, PermissionStartDate, PermissionEndDate, Name, Email, Dno) VALUES(@id, @PSdate, @PEdate, @Name, @Email, @dno)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
-                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
-                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
-                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = Name;
-                command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = Email;
-                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = Dno;
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = temp.Id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = temp.Name;
+                command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = temp.Email;
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = temp.Dno;
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
 
-                    setToken(SelectManager(Dno));
+                    setToken(SelectManager(temp.Dno));
                     SmartfaceRequest request = new SmartfaceRequest(token);
-                    Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + Dno, "GET"));
-                    request.requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + Name + "&fullName=" + Name + "&note=" + Email + "," + " " + "," + id +
-                         "&watchlistId=" + watchlist.id + "&imgUrl=C://SmartFaceImages//Mom.png", "POST");
+                    Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + temp.Dno, "GET"));
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + temp.ImageData + "\"}";
+                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST", json);
                 }
                 catch (Exception e)
                 {
