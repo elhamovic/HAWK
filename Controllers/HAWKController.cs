@@ -97,7 +97,7 @@ namespace HAWK_v.Controllers
             }
             else
             {
-                return View("LoginFail", userModel);
+                return View("Fail", userModel);
             }
         }
         public IActionResult SignUp()
@@ -105,7 +105,6 @@ namespace HAWK_v.Controllers
             return View();
 
         }
-        [HttpPost("EmployeeMain")]
         public IActionResult EmployeeMain(UserModel user)
         {
 
@@ -138,7 +137,7 @@ namespace HAWK_v.Controllers
             }
             else
             {
-                return View("LoginFail", user);
+                return View("Fail", user);
             }
         }
        
