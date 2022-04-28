@@ -12,7 +12,7 @@ namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         List<TempModel> TempUsers;
         List<UserModel> Users;
         private string token = "";
@@ -33,38 +33,39 @@ namespace HAWK_v.Services
                     {
                         reader.Read();
                         user.Id =  (int)(reader["Id"]);
+                        string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                        string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
+                        using (SqlConnection connection2 = new SqlConnection(connectionString2))
+                        {
+                            try
+                            {
+                                SqlCommand command2 = new SqlCommand(sqlStatment2, connection2);
+                                command2.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
+
+                                connection2.Open();
+                                SqlDataReader reader1 = command2.ExecuteReader();
+                                if (reader1.HasRows)
+                                {
+                                    reader1.Read();
+                                    user.Role = (string)(reader1["Role"]);
+                                    user.Dno = (int)(reader1["Dno"]);
+                                    user.Name = (string)(reader1["Name"]);
+                                    user.Email = (string)(reader1["Email"]);
+                                    success = true;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=LAPTOP-O3E4PDUK\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
-                using (SqlConnection connection2 = new SqlConnection(connectionString2))
-                {
-                    try
-                    {
-                        SqlCommand command2 = new SqlCommand(sqlStatment2, connection2);
-                        command2.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
 
-                        connection2.Open();
-                        SqlDataReader reader = command2.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            reader.Read();
-                            user.Role =  (string)(reader["Role"]);
-                            user.Dno =  (int)(reader["Dno"]);
-                            user.Name =  (string)(reader["Name"]);
-                            user.Email = (string)(reader["Email"]);
-                            success = true;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
             }
             return success;
         }

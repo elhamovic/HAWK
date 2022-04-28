@@ -91,7 +91,6 @@ namespace HAWK_v.Controllers
                 }
                 else {
                     ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
-
                     return View("EmployeeMain", userModel);
                 }
             }
