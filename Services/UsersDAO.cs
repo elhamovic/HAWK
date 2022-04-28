@@ -106,24 +106,27 @@ namespace HAWK_v.Services
             }
             return true;
         }
-        public bool UpdateTemp(int id, string PSdate, string PEdate, string Name, string Email, int Dno)
+        public bool UpdateTemp(TempModel temp)
         {
             string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate, Name = @name, Email = @email, Dno = @dno WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
-                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
-                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
-                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = Name;
-                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = Email;
-                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = Dno;
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = temp.Id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PEndDate;
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = temp.Name;
+                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = temp.Email;
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = temp.Dno;
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
-                    string json = "{\"id\":\"" + id + "\",\"fullName\":\"" + Name + "\",\"displayName\":\"" + Name + "\",\"note\":\"" + Email+", ,"+ id+ "\"}";
-                    new SmartfaceRequest(token).requestWithBody("WatchlistMember/update", "POST", null);
+                    command.ExecuteNonQuery();
+                    setToken(SelectManager(temp.Dno));
+                    SmartfaceRequest request = new SmartfaceRequest(token);
+                    string member = "{\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"}";
+                    request.requestNoBody("WatchlistMember/update?member=" + member, "POST");
                 }
                 catch (Exception e)
                 {

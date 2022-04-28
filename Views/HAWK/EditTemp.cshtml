@@ -7,17 +7,6 @@
         <div class=" white-block bg-white tm-block h-100">
             <div class="Camera-form">
                 <form asp-action="EditTempToDB">
-                    <input asp-for="Id" type="text" value="@Model.Id" style="display: none">
-                    <div class="input-group mb-4 mr-sm-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Full Name</div>
-                            <label asp-for="Name" class="sr-only" for="inlineFormInputGroupUsername1"></label>
-                        </div>
-
-                        <input asp-for="Name" type="text" class="form-control" id="inlineFormInputGroupUsername1">
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Email</div>
@@ -46,6 +35,16 @@
 
                         <input asp-for="PEndDate" type="text" class="form-control" id="inlineFormInputGroupUsername2">
                         <span asp-validation-for="PEndDate" class="text-danger"></span>
+
+                    </div>
+                    <div class="input-group mb-4 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Department Number</div>
+                            <label asp-for="Dno" class="sr-only" for="inlineFormInputGroupUsername2"></label>
+                        </div>
+
+                        <input asp-for="Dno" type="text" class="form-control" id="inlineFormInputGroupUsername2">
+                        <span asp-validation-for="Dno" class="text-danger"></span>
 
                     </div>
                     <button type="submit" class="btn btn-action btn-sm px-2" style="float: right">Save</button>
