@@ -84,7 +84,7 @@ namespace HAWK_v.Controllers
             }
             else
             {
-                return View("LoginFail", userModel);
+                return View("Fail", userModel);
             }
         }
         public IActionResult SignUp()
@@ -92,7 +92,7 @@ namespace HAWK_v.Controllers
             return View();
 
         }
-        public IActionResult EmployeeMain(UserModel user)
+        public IActionResult RigisterationCheck(UserModel user)
         {
             if (hrdh.Exist(user) != false)
             {
@@ -114,7 +114,7 @@ namespace HAWK_v.Controllers
             }
             else
             {
-                return View("LoginFail", user);
+                return View("Fail", user);
             }
         }
        
