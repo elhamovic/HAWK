@@ -122,7 +122,6 @@ namespace HAWK_v.Services
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
-                    command.ExecuteNonQuery();
                     setToken(SelectManager(temp.Dno));
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     string member = "{\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"}";
