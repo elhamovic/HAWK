@@ -75,5 +75,9 @@ namespace HAWK_v.Services
         {
             return userDAO.SelectManager(Dno);
         }
+        public List<int> GetDepartments()
+        {
+            return userDAO.GetDepartments();
+        }
     }
 }

@@ -346,6 +346,30 @@ namespace HAWK_v.Services
                 return AttendanceList;
             }
         }
+        public List<int> GetDepartments()
+        {
+            List<int> DepartmentList = new List<int>(); ;
+            string sqlStatment = "SELECT * FROM [dbo].[Departments]";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read() != false)
+                    {
+                        int Dno = (int)reader["Dno"];
+                        DepartmentList.Add(Dno);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return DepartmentList;
+            }
+        }
         private async void setToken(UserModel user)
         {
             try

@@ -1,3 +1,4 @@
+using HAWK_v.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,8 @@ namespace HAWK_v
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHostedService<TempValidationBackgroundService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
