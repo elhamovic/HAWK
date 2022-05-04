@@ -74,7 +74,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(userModel))
                 {
-                    return Redirect("http://localhost:63342/SmartfaceSolution/Front/HomePage.html");
+                    return Redirect("http://localhost:63342/HAWK_SmartFace_Solution/Front/HomePage.html");
                 }
                 else {
                     ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
@@ -104,7 +104,7 @@ namespace HAWK_v.Controllers
                 }
                 else if (hdb.isAdmin(user))
                 {
-                    return Redirect("http://localhost:63342/SmartfaceSolution/Front/HomePage.html");
+                    return Redirect("http://localhost:63342/HAWK_SmartFace_Solution/Front/HomePage.html");
                 }
                 else
                 {

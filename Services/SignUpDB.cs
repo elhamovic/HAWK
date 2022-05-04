@@ -14,8 +14,8 @@ namespace HAWK_v.Services
 {
     public class SignUpDB
     {
-        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWKSYS;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog=HR;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString2 = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         string token;
         public  bool SearchEmployee(UserModel user)
         {

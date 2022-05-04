@@ -44,31 +44,32 @@
 
                             @foreach (var item in Model)
                             {
-                    if (item.Id != 0) { 
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PStartDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PEndDate)
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" asp-route-id="@item.Id" role="button">
-                                            <i class='fas fa-edit' style='font-size:16px'></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id="@item.Id" role="button">
-                                            <i class='fas fa-trash' style='font-size:16px'></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                if (item.Id != 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PStartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PEndDate)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="EditTemp" asp-route-id="@item.Id" role="button">
+                                                <i class='fas fa-edit' style='font-size:16px'></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id="@item.Id" role="button">
+                                                <i class='fas fa-trash' style='font-size:16px'></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 }
                             }
                         }
@@ -81,9 +82,13 @@
             </table>
         </div>
     </div>
+    @{
+        string[] dep = { "0", "https://app.powerbi.com/view?r=eyJrIjoiZWNkNjhlZTQtMzg1MC00NGE0LWE3MTItMjYxYWI1MzU1ZDIwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection34e4f65e77c1207622ae", "https://app.powerbi.com/view?r=eyJrIjoiODkzYjkxOWItNDlmNC00NmM3LWEyYmMtY2ViNmYzMjEyMGMwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection34e4f65e77c1207622ae", "https://app.powerbi.com/view?r=eyJrIjoiODIyMzY0MzAtYWYyOS00OWZmLWJjMWQtNjEzNzM4NGEwZmJlIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection34e4f65e77c1207622ae" };
+
+    }
     <div class="col-4">
         <br />
-        <iframe title="HAWK-Analysis" width="700" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiZTU2Njk2ODMtZGUxNC00MDMxLTkxOWEtYjMyMDU0YjJjNDEwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection?filter=Users/Dno eq 2" frameborder="0" allowFullScreen="true"></iframe>
+        <iframe title="Dno1 - Manager" width="600" height="373.5" src="@dep[Model.ElementAt(0).Dno]" frameborder="0" allowFullScreen="true"></iframe>
     </div>
-</div>
+
 
