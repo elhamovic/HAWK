@@ -10,6 +10,7 @@
         <div class=" white-block bg-white tm-block h-100">
             <div class="Camera-form">
                 <form asp-action="AddTempToDB" method="post" enctype="multipart/form-data">
+                    <input asp-for="Dno" type="text" style="visibility:hidden;" value="@ViewBag.tempDno" class="form-control" id="inlineFormInputGroupUsername2">
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Full Name</div>
@@ -30,10 +31,6 @@
                         <input asp-for="Email" type="text" class="form-control" id="inlineFormInputGroupUsername2">
                         <span asp-validation-for="Email" class="text-danger"></span>
 
-                    </div>
-                    <div class="input-group mb-4 mr-sm-2">
-                        <input asp-for="Dno" type="text" style="visibility:hidden" value="@ViewBag.tempDno" class="form-control" id="inlineFormInputGroupUsername2">
-                        <span asp-validation-for="Dno" class="text-danger"></span>
                     </div>
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">

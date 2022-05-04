@@ -22,8 +22,9 @@ namespace HAWK_v.Controllers
         [Route("HAWK/Manager/{dno?}")]
         public IActionResult Manager(int dno)
         {
-            ViewBag.Attendnce = hdb.GetAttendnce(hdb.GetManager(dno).Id);
-            return View(hdb.GetManager(dno));
+            UserModel manager = hdb.GetManager(dno);
+            ViewBag.Attendnce = hdb.GetAttendnce(manager.Id);
+            return View(manager);
         }
         [Route("HAWK/Department/{dno?}")]
         public IActionResult Department(int dno)
@@ -102,11 +103,9 @@ namespace HAWK_v.Controllers
         public IActionResult SignUp()
         {
             return View();
-
         }
-        public IActionResult EmployeeMain(UserModel user)
+        public IActionResult RegistrationCheck(UserModel user)
         {
-
             if (user.Image != null)
             {
                 using (var memoryStream = new MemoryStream())
@@ -139,6 +138,5 @@ namespace HAWK_v.Controllers
                 return View("Fail", user);
             }
         }
-       
     }
 }
