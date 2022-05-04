@@ -12,7 +12,6 @@ namespace HAWK_v.Services
     public class TempValidationBackgroundService : BackgroundService
     {
         private readonly ILogger<TempValidationBackgroundService> _logger;
-        private Timer timer;
         private DateTime date;
         public TempValidationBackgroundService(ILogger<TempValidationBackgroundService> logger)
         {
