@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,8 @@ namespace HAWK_v.Models
         public string Password { get; set; }
         [Required]
         [DisplayName("Upload Face Image:")]
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
+        public string ImageData { get; set; }
         public string Role { get; set; }
         public string Name { get; set; }
         public int Dno { get; set; }

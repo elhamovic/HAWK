@@ -39,8 +39,9 @@ namespace HAWK_v.Helpers
                     (HttpWebRequest)WebRequest.Create(serverName + reqUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = methodType;
-
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            httpWebRequest.Headers.Add("Authorization", "Bearer " + Token);
+            Console.WriteLine(json);
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     try
                     {

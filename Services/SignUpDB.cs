@@ -89,8 +89,8 @@ namespace HAWK_v.Services
                     setToken(user);
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + user.Dno, "GET"));
-                    request.requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + user.Name + "&fullName=" + user.Name + "&note=" + user.Email + "," + phonenumber + "," + user.Id +
-                        "&watchlistId=" + watchlist.id + "&imgUrl=C://SmartFaceImages//Mom.png", "POST");
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + user.Name + "\",\"fullName\": \"" + user.Name + "\",\"note\":\"" + user.Email + "," + phonenumber + "," + user.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + user.ImageData + "\"}";
+                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST",json);
                 }
                 catch (Exception e)
                 {

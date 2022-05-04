@@ -3,8 +3,11 @@ using HAWK_v.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HAWK_v.Controllers
 {
@@ -19,8 +22,9 @@ namespace HAWK_v.Controllers
         [Route("HAWK/Manager/{dno?}")]
         public IActionResult Manager(int dno)
         {
-            ViewBag.Attendnce = hdb.GetAttendnce(hdb.GetManager(dno).Id);
-            return View(hdb.GetManager(dno));
+            UserModel manager = hdb.GetManager(dno);
+            ViewBag.Attendnce = hdb.GetAttendnce(manager.Id);
+            return View(manager);
         }
         [Route("HAWK/Department/{dno?}")]
         public IActionResult Department(int dno)
@@ -38,8 +42,18 @@ namespace HAWK_v.Controllers
             ViewBag.tempDno = dno;
             return View();
         }
+        [HttpPost("AddTempToDB")]
         public IActionResult AddTempToDB(TempModel temp)
         {
+            if (temp.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    temp.Image.CopyToAsync(memoryStream);
+                    temp.ImageData = Convert.ToBase64String(memoryStream.ToArray());
+
+                }
+            }
             hdb.AddTemp(temp);
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
@@ -78,22 +92,29 @@ namespace HAWK_v.Controllers
                 }
                 else {
                     ViewBag.Attendnce = hdb.GetAttendnce(userModel.Id);
-
                     return View("EmployeeMain", userModel);
                 }
             }
             else
             {
-                return View("LoginFail", userModel);
+                return View("Fail", userModel);
             }
         }
         public IActionResult SignUp()
         {
             return View();
-
         }
-        public IActionResult EmployeeMain(UserModel user)
+        public IActionResult RegistrationCheck(UserModel user)
         {
+            if (user.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    user.Image.CopyToAsync(memoryStream);
+                    user.ImageData = Convert.ToBase64String(memoryStream.ToArray());
+                   
+                }
+            }
             if (hrdh.Exist(user) != false)
             {
                 if (hdb.isManager(user))
@@ -114,9 +135,8 @@ namespace HAWK_v.Controllers
             }
             else
             {
-                return View("LoginFail", user);
+                return View("Fail", user);
             }
         }
-       
     }
 }

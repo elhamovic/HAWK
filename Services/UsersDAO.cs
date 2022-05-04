@@ -33,38 +33,39 @@ namespace HAWK_v.Services
                     {
                         reader.Read();
                         user.Id =  (int)(reader["Id"]);
+                        string connectionString2 = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                        string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
+                        using (SqlConnection connection2 = new SqlConnection(connectionString2))
+                        {
+                            try
+                            {
+                                SqlCommand command2 = new SqlCommand(sqlStatment2, connection2);
+                                command2.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
+
+                                connection2.Open();
+                                SqlDataReader reader1 = command2.ExecuteReader();
+                                if (reader1.HasRows)
+                                {
+                                    reader1.Read();
+                                    user.Role = (string)(reader1["Role"]);
+                                    user.Dno = (int)(reader1["Dno"]);
+                                    user.Name = (string)(reader1["Name"]);
+                                    user.Email = (string)(reader1["Email"]);
+                                    success = true;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                string connectionString2 = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog=HAWK;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                string sqlStatment2 = "SELECT * FROM [dbo].[Users] WHERE Id = @id";
-                using (SqlConnection connection2 = new SqlConnection(connectionString2))
-                {
-                    try
-                    {
-                        SqlCommand command2 = new SqlCommand(sqlStatment2, connection2);
-                        command2.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = user.Id;
 
-                        connection2.Open();
-                        SqlDataReader reader = command2.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            reader.Read();
-                            user.Role =  (string)(reader["Role"]);
-                            user.Dno =  (int)(reader["Dno"]);
-                            user.Name =  (string)(reader["Name"]);
-                            user.Email = (string)(reader["Email"]);
-                            success = true;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
             }
             return success;
         }
@@ -105,24 +106,26 @@ namespace HAWK_v.Services
             }
             return true;
         }
-        public bool UpdateTemp(int id, string PSdate, string PEdate, string Name, string Email, int Dno)
+        public bool UpdateTemp(TempModel temp)
         {
             string sqlStatment = "UPDATE [dbo].[TempUser] SET PermissionStartDate = @PSdate, PermissionEndDate = @PEdate, Name = @name, Email = @email, Dno = @dno WHERE Id = @id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
-                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
-                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
-                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = Name;
-                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = Email;
-                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = Dno;
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = temp.Id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PEndDate;
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, -1).Value = temp.Name;
+                command.Parameters.Add("@email", System.Data.SqlDbType.VarChar, -1).Value = temp.Email;
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = temp.Dno;
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
-                    string json = "{\"id\":\"" + id + "\",\"fullName\":\"" + Name + "\",\"displayName\":\"" + Name + "\",\"note\":\"" + Email+", ,"+ id+ "\"}";
-                    new SmartfaceRequest(token).requestWithBody("WatchlistMember/update", "POST", null);
+                    setToken(SelectManager(temp.Dno));
+                    SmartfaceRequest request = new SmartfaceRequest(token);
+                    string member = "{\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"}";
+                    request.requestNoBody("WatchlistMember/update?member=" + member, "POST");
                 }
                 catch (Exception e)
                 {
@@ -131,28 +134,28 @@ namespace HAWK_v.Services
                 return true;
             }
         }
-        public bool AddTemp(int id, string PSdate, string PEdate, string Name, string Email, int Dno)
+        public bool AddTemp(TempModel temp)
         {
             string sqlStatment = "INSERT INTO [dbo].[TempUser] (Id, PermissionStartDate, PermissionEndDate, Name, Email, Dno) VALUES(@id, @PSdate, @PEdate, @Name, @Email, @dno)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
-                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = id;
-                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = PSdate;
-                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = PEdate;
-                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = Name;
-                command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = Email;
-                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = Dno;
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = temp.Id;
+                command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = temp.Name;
+                command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = temp.Email;
+                command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = temp.Dno;
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
 
-                    setToken(SelectManager(Dno));
+                    setToken(SelectManager(temp.Dno));
                     SmartfaceRequest request = new SmartfaceRequest(token);
-                    Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + Dno, "GET"));
-                    request.requestNoBody("WatchlistMember/CreateAndResgister?displayName=" + Name + "&fullName=" + Name + "&note=" + Email + "," + " " + "," + id +
-                         "&watchlistId=" + watchlist.id + "&imgUrl=C://SmartFaceImages//Mom.png", "POST");
+                    Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + temp.Dno, "GET"));
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + temp.ImageData + "\"}";
+                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST", json);
                 }
                 catch (Exception e)
                 {
@@ -343,6 +346,30 @@ namespace HAWK_v.Services
                 return AttendanceList;
             }
         }
+        public List<int> GetDepartments()
+        {
+            List<int> DepartmentList = new List<int>(); ;
+            string sqlStatment = "SELECT * FROM [dbo].[Departments]";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlStatment, connection);
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read() != false)
+                    {
+                        int Dno = (int)reader["Dno"];
+                        DepartmentList.Add(Dno);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return DepartmentList;
+            }
+        }
         private async void setToken(UserModel user)
         {
             try
@@ -355,7 +382,7 @@ namespace HAWK_v.Services
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
         }
     }

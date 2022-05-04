@@ -1,5 +1,7 @@
 ﻿@model HAWK_v.Models.TempModel
-
+@{
+    ViewBag.MangDno = @ViewBag.tempDno;
+}
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
         <h2>New Temp-User</h2>
@@ -7,7 +9,8 @@
 
         <div class=" white-block bg-white tm-block h-100">
             <div class="Camera-form">
-                <form asp-action="AddTempToDB">
+                <form asp-action="AddTempToDB" method="post" enctype="multipart/form-data">
+                    <input asp-for="Dno" type="text" style="visibility:hidden;" value="@ViewBag.tempDno" class="form-control" id="inlineFormInputGroupUsername2">
                     <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Full Name</div>
@@ -30,10 +33,6 @@
 
                     </div>
                     <div class="input-group mb-4 mr-sm-2">
-                        <input asp-for="Dno" type="text" style="display:none" value="@ViewBag.tempDno" class="form-control" id="inlineFormInputGroupUsername2">
-                        <span asp-validation-for="Dno" class="text-danger"></span>
-                    </div>
-                    <div class="input-group mb-4 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Permission Start Date</div>
                             <label asp-for="PStartDate" class="sr-only" for="inlineFormInputGroupUsername2"></label>
@@ -52,6 +51,11 @@
                         <input asp-for="PEndDate" type="text" class="form-control" id="inlineFormInputGroupUsername2">
                         <span asp-validation-for="PEndDate" class="text-danger"></span>
 
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input asp-for="Image" class="form-control">
+                        <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-action btn-sm px-2" style="float: right">Save</button>
                 </form>
