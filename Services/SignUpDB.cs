@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HAWK_v.Services
@@ -89,8 +90,7 @@ namespace HAWK_v.Services
                     setToken(user);
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + user.Dno, "GET"));
-                    string json = "{\"watchlistMember\": {\"displayName\":\"" + user.Name + "\",\"fullName\": \"" + user.Name + "\",\"note\":\"" + user.Email + "," + phonenumber + "," + user.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + user.ImageData + "\"}";
-                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST",json);
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + user.Name + "\",\"fullName\": \"" + user.Name + "\",\"note\":\"" + Regex.Replace((user.Email + ", " + "," + user.Id), @"\s+", "") + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + user.ImageData + "\"}"; request.requestWithBody("WatchlistMember/CreateAndResgister", "POST",json);
                 }
                 catch (Exception e)
                 {
