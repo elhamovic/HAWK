@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HAWK_v.Helpers;
 using HAWK_v.helpers;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace HAWK_v.Services
 {
@@ -154,8 +155,7 @@ namespace HAWK_v.Services
                     setToken(SelectManager(temp.Dno));
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + temp.Dno, "GET"));
-                    string json = "{\"watchlistMember\": {\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + temp.Email + ", " + "," + temp.Id + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + temp.ImageData + "\"}";
-                    request.requestWithBody("WatchlistMember/CreateAndResgister", "POST", json);
+                    string json = "{\"watchlistMember\": {\"displayName\":\"" + temp.Name + "\",\"fullName\": \"" + temp.Name + "\",\"note\":\"" + Regex.Replace((temp.Email + ", " + "," + temp.Id), @"\s+", "") + "\"},\"watchlistId\":\"" + watchlist.id + "\",\"img\":\"" + temp.ImageData + "\"}"; request.requestWithBody("WatchlistMember/CreateAndResgister", "POST", json);
                 }
                 catch (Exception e)
                 {
