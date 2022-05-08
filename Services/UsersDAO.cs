@@ -13,7 +13,7 @@ namespace HAWK_v.Services
 {
     public class UsersDAO
     {
-        string connectionString = @"Data Source=DESKTOP-SA7PNQU\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         List<TempModel> TempUsers;
         List<UserModel> Users;
         private string token = "";
@@ -370,7 +370,7 @@ namespace HAWK_v.Services
                 return DepartmentList;
             }
         }
-        private async void setToken(UserModel user)
+        private void setToken(UserModel user)
         {
             try
             {
