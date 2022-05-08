@@ -5,28 +5,20 @@
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
 
-        <h2>
-            Attendance Statistics
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Weekly</button>
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Monthly</button>
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Yearly</button>
-
-        </h2>
+        <h2>Attendance Statistics</h2>
         <br />
-        <h5> Finance Department</h5>
     </div>
 </div>
-
 <div class="row">
     <div class="col-4">
         <br />
-
         <div class="table-responsive">
             <table class="table table-striped mt-4">
                 <thead>
                     <tr class="tm-bg-gray">
                         <th>Name</th>
                         <th>Email</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,8 +26,6 @@
                     {
                         if (!item.Role.Contains("Manager"))
                         {
-
-
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
@@ -43,8 +33,6 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Role)
                                 </td>
-
-
                                 <td>
                                     <a class="btn btn-outline-dark btn-floating" asp-area="" asp-controller="HAWK" asp-action="DeleteTempToDB" asp-route-id="@item.Id" role="button">
                                         <i class='fas fa-trash' style='font-size:16px'></i>
@@ -56,15 +44,13 @@
                 </tbody>
             </table>
         </div>
-
     </div>
     @{
         string[] dep = { "0", "https://app.powerbi.com/view?r=eyJrIjoiZWNkNjhlZTQtMzg1MC00NGE0LWE3MTItMjYxYWI1MzU1ZDIwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSectiond9eac57b7fb5436f8a1e", "https://app.powerbi.com/view?r=eyJrIjoiODkzYjkxOWItNDlmNC00NmM3LWEyYmMtY2ViNmYzMjEyMGMwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSectiond9eac57b7fb5436f8a1e", "https://app.powerbi.com/view?r=eyJrIjoiODIyMzY0MzAtYWYyOS00OWZmLWJjMWQtNjEzNzM4NGEwZmJlIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSectiond9eac57b7fb5436f8a1e" };
 
-
     }
     <div class="col-8">
         <br />
-        <iframe title="Dno1 - Manager" width="600" height="373.5" src="@dep[Model.ElementAt(0).Dno]" frameborder="0" allowFullScreen="true"></iframe>
+        <iframe title="Dno1 - Manager" width="600" height="500" src="@dep[Model.ElementAt(0).Dno]" frameborder="0" allowFullScreen="true"></iframe>
     </div>
-
+    </div>

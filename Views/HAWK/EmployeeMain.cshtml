@@ -1,26 +1,15 @@
 ﻿@model HAWK_v.Models.UserModel
-
 @{
     Layout = "\\EmpLayout.cshtml";
-
-
 }
-
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
-        <h2>
-            Attendance Statistics
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Weekly</button>
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Monthly</button>
-            <button type="button" class="btn btn-outline-dark btn-floating m-1" style="float:right" onclick="">Yearly</button>
-        </h2>
+        <h2>Attendance Statistics </h2>
     </div>
 </div>
-
 <div class="row">
     <div class="col-4">
         <br />
-
         <div class="table-responsive">
             <table class="table table-striped mt-4">
                 <thead>
@@ -51,21 +40,21 @@
                                     </td>
                                 </tr>
                             }
-            }
-            catch(Exception e)
-            {
+                        }
+                        catch (Exception e)
+                        {
 
-            }
+                        }
                     }
                 </tbody>
             </table>
         </div>
 
     </div>
-
     <div class="col-8">
         <br />
+        <iframe title="HawkEmpAnalysis - Employee" width="600" height="500" src="https://app.powerbi.com/reportEmbed?reportId=aca4b1fa-9f85-4071-a5e7-e7c9ee7d8bb0&autoAuth=true&ctid=2d3194e3-1654-46bd-bae2-ad37ba11b0ae&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXdlc3QtZXVyb3BlLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9&filter=Users/Name eq '@Model.Name'" frameborder="0" allowFullScreen="true"></iframe>
 
-        <iframe title="HawkAnalysis" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiM2FjMzIxMzQtY2E3Zi00ODMwLThjZDItOGQzZWE3ODVkZDVjIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
     </div>
 </div>
+
