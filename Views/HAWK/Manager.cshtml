@@ -4,9 +4,9 @@
 }
 <div class="row tm-content-row tm-mt-big">
     <div class="col-xl-12 col-lg-12 tm-md-12 tm-sm-12 tm-col">
-
         <h2>Attendance Statistics</h2>
         <br />
+
     </div>
 </div>
 <div class="row">
@@ -54,11 +54,11 @@
 
     </div>
     @{
-        string[] dep = { "0", "https://app.powerbi.com/view?r=eyJrIjoiZWNkNjhlZTQtMzg1MC00NGE0LWE3MTItMjYxYWI1MzU1ZDIwIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9", "https://app.powerbi.com/view?r=eyJrIjoiM2FjMzIxMzQtY2E3Zi00ODMwLThjZDItOGQzZWE3ODVkZDVjIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection", "https://app.powerbi.com/view?r=eyJrIjoiODIyMzY0MzAtYWYyOS00OWZmLWJjMWQtNjEzNzM4NGEwZmJlIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&pageName=ReportSection" };
+        string[] dep = { "0", "https://app.powerbi.com/view?r=eyJrIjoiYzhlYWRkY2ItYzNlNi00OGM2LTk3OGUtMzQ0MzNmZjdlYjQ4IiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9", "https://app.powerbi.com/view?r=eyJrIjoiNTdhNzk4N2ItMGM0Zi00MTNjLWEwYjYtYzNkM2M0ZTA0OGUzIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9", "https://app.powerbi.com/view?r=eyJrIjoiODc0YWQ1NjItNzNiMi00NDA2LTk5MDItMzU4MTVkYTM5ZTUyIiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9" };
     }
 
-    <div class="col-8">
-        <br />
-        <iframe width="600" height="500" src="@dep[ Model.Dno]" frameborder="0" allowFullScreen="true"></iframe>
-    </div>
+<div class="col-8">
+    <br />
+    <iframe title="HawkAnalysis" width="600" height="500" src="@dep[ Model.Dno]" frameborder="0" allowFullScreen="true"></iframe>
+</div>
     </div>
