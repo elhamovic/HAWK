@@ -1,73 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="HAWK_v.Controllers.HAWKController">
-    <Position X="12.5" Y="1.5" Width="1.5" />
+    <Position X="7.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAiAAAAIACBAAAQAAAAIAEAAABAAAAAEAAQRABAA=</HashCode>
+      <HashCode>AAAAAiAAAAIACBAAAQAACAAAEAAABAAAAAEAAQRABAA=</HashCode>
       <FileName>Controllers\HAWKController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HAWK_v.helpers.AuthenticateResponse">
-    <Position X="7.5" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgA=</HashCode>
-      <FileName>Helpers\AuthenticateResponse.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="HAWK_v.helpers.Watchlist">
-    <Position X="7.5" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
-      <FileName>Helpers\Watchlist.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="HAWK_v.Helpers.SmartfaceRequest">
-    <Position X="9.25" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAgAABAAA=</HashCode>
-      <FileName>Helpers\SmartfaceRequest.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="HAWK_v.Models.TempModel">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="9.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAUGAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAUGAAAAACAAAAAAAAAAAIQAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\TempModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HAWK_v.Models.UserModel">
-    <Position X="3.5" Y="0.75" Width="1.5" />
+    <Position X="9.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECAAAAACAAAAAAEAAAAAQAAAAAABACAQAAAAAAAAA=</HashCode>
+      <HashCode>AAECAAAAACAAAAAAEAAAAIQAAAAAABACAQAAAAAAAAA=</HashCode>
       <FileName>Models\UserModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HAWK_v.Services.HAWKDB">
-    <Position X="1.25" Y="3.25" Width="1.5" />
+    <Position X="4.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAgAAACBCAIAAAAgQAAAAAACgIAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAABAAAgAAACBCAIAAAAgQAAAAAACgIAAAQIAAAAAA=</HashCode>
       <FileName>Services\HAWKDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HAWK_v.Services.HRDB">
-    <Position X="5.75" Y="2.75" Width="1.5" />
+    <Position X="6" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Services\HRDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HAWK_v.Services.SignUpDB">
-    <Position X="3.25" Y="3.5" Width="1.5" />
+    <Position X="6" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAQAAAAAAgAAAAAAAAAAAAAIAAAAAAAABAAAAA=</HashCode>
       <FileName>Services\SignUpDB.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HAWK_v.Services.UsersDAO">
-    <Position X="5.75" Y="4.75" Width="1.5" />
+  <Class Name="HAWK_v.Services.TempValidationBackgroundService">
+    <Position X="11.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAEAAiAQgAQAABgAAAEgAAQAAAAAACAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAAAQAAAEA=</HashCode>
+      <FileName>Services\TempValidationBackgroundService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HAWK_v.Services.UsersDAO">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAAiAQgAQAABgAAAEgAAQAAAAAACAAIAAAIAAAAAA=</HashCode>
       <FileName>Services\UsersDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HAWK_v.helpers.AuthenticateResponse">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Helpers\AuthenticateResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HAWK_v.helpers.Watchlist">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Helpers\Watchlist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HAWK_v.Helpers.SmartfaceRequest">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAgAABAAA=</HashCode>
+      <FileName>Helpers\SmartfaceRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

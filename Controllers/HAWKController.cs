@@ -13,12 +13,28 @@ namespace HAWK_v.Controllers
 {
     public class HAWKController : Controller
     {
+        /// <summary>
+        /// creating the srvice proxy class object to be able to call the database methods 
+        /// </summary>
         HAWKDB hdb = new HAWKDB();
         HRDB hrdh = new HRDB();
+
+        /// <summary>
+        /// The Index() controller displays the login page (the first page in the website)
+        /// </summary>
+        /// <returns> the Index.cshtml view </returns>
         public IActionResult Index()
         {
             return View();
         }
+        /// <summary>
+        /// The Manager(int dno) controller shows the manager homepage, where the manager can track his/her own attendance statistics.
+        /// there are 2 methods used in this controller:
+        /// GetManager: 
+        /// GetAttendance: 
+        /// </summary>
+        /// <param name="dno"></param>
+        /// <returns>the Manager.cshtml view</returns>
         [Route("HAWK/Manager/{dno?}")]
         public IActionResult Manager(int dno)
         {
@@ -26,6 +42,11 @@ namespace HAWK_v.Controllers
             ViewBag.Attendnce = hdb.GetAttendnce(manager.Id);
             return View(manager);
         }
+        /// <summary>
+        /// The Department(int dno) controller shows the manager department page, where the manager can track the attendance of the department employees.  
+        /// </summary>
+        /// <param name="dno"></param>
+        /// <returns>the Department.cshtml view</returns>
         [Route("HAWK/Department/{dno?}")]
         public IActionResult Department(int dno)
         {

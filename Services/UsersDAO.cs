@@ -143,7 +143,7 @@ namespace HAWK_v.Services
                 SqlCommand command = new SqlCommand(sqlStatment, connection);
                 command.Parameters.Add("@id", System.Data.SqlDbType.Int, 4).Value = temp.Id;
                 command.Parameters.Add("@PSdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
-                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PStartDate;
+                command.Parameters.Add("@PEdate", System.Data.SqlDbType.VarChar, -1).Value = temp.PEndDate;
                 command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, -1).Value = temp.Name;
                 command.Parameters.Add("@Email", System.Data.SqlDbType.VarChar, -1).Value = temp.Email;
                 command.Parameters.Add("@dno", System.Data.SqlDbType.Int, 4).Value = temp.Dno;
@@ -151,7 +151,6 @@ namespace HAWK_v.Services
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
-
                     setToken(SelectManager(temp.Dno));
                     SmartfaceRequest request = new SmartfaceRequest(token);
                     Watchlist watchlist = JsonSerializer.Deserialize<Watchlist>(request.requestNoBody("Watchlist/getWatchlistByName?name=" + temp.Dno, "GET"));
@@ -226,14 +225,16 @@ namespace HAWK_v.Services
                             temp.Name  = (string)(reader["Name"]);
                             temp.Email  = (string)(reader["Email"]);
                             temp.Dno = (int)(reader["Dno"]);
+                        return temp;
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                return temp;
             }
+            return null;
+
         }
         public List<UserModel> GetDepartmentEmps(int Dno)
         {
