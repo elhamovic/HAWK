@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace HAWK_v.Services
 {
+    /// <summary>
+    /// This Class manages the communication with the HAWK Database
+    /// </summary>
     public class UsersDAO
     {
         string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog = HAWK; User ID = smartface; Password=smartface; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

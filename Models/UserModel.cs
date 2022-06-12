@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Models
 {
+    /// <summary>
+    /// This Class Represent the UserModel attributes
+    /// </summary>
     public class UserModel
     {
        public int Id { get; set; }

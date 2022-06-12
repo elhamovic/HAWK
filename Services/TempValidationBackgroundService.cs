@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Services
 {
+    /// <summary>
+    /// This class is a daily background task that deletes the TempUser if his/her permission date was finished
+    /// </summary>
     public class TempValidationBackgroundService : BackgroundService
     {
         private readonly ILogger<TempValidationBackgroundService> _logger;

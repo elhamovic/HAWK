@@ -11,6 +11,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace HAWK_v.Controllers
 {
+    /// <summary>
+    /// this class manages the communication between the front and back end.
+    /// </summary>
     public class HAWKController : Controller
     {
         /// <summary>
@@ -52,17 +55,32 @@ namespace HAWK_v.Controllers
         {
             return View(hdb.GetDepartmentEmps(dno));
         }
+        /// <summary>
+        /// this controller opens the tempuser main page
+        /// </summary>
+        /// <param name="dno"></param>
+        /// <returns></returns>
         [Route("HAWK/TempUser/{dno?}")]
         public IActionResult TempUser(int dno)
         {
             return View(hdb.GetAllTemp(dno));
         }
+        /// <summary>
+        /// this class opens the add temp page
+        /// </summary>
+        /// <param name="dno"></param>
+        /// <returns></returns>
         [Route("HAWK/AddTemp/{dno?}")]
         public IActionResult AddTemp(int dno)
         {
             ViewBag.tempDno = dno;
             return View();
         }
+        /// <summary>
+        /// this class calls the database class and adds the temp to the database
+        /// </summary>
+        /// <param name="temp"></param>
+        /// <returns></returns>
         [HttpPost("AddTempToDB")]
         public IActionResult AddTempToDB(TempModel temp)
         {
@@ -78,24 +96,43 @@ namespace HAWK_v.Controllers
             hdb.AddTemp(temp);
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
+        /// <summary>
+        /// this class opens the edit temp page
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("HAWK/EditTemp/{id?}")]  
         public IActionResult EditTemp(int id)
         {
             return View(hdb.GetTemp(id));
         }
+        /// <summary>
+        ///  this class calls the database class and deletes the temp to the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("HAWK/DeleteTempToDB/{id?}")]
-
         public IActionResult DeleteTempToDB(int id)
         {
             int depnum = hdb.GetTemp(id).Dno;
             hdb.DeleteTemp(id);
             return View("TempUser", hdb.GetAllTemp(depnum));
         }
+        /// <summary>
+        ///  this class calls the database class and edites the temp to the database
+        /// </summary>
+        /// <param name="temp"></param>
+        /// <returns></returns>
         public IActionResult EditTempToDB(TempModel temp)
         {
             hdb.UpdateTemp(temp);
             return View("TempUser", hdb.GetAllTemp(temp.Dno));
         }
+        /// <summary>
+        /// this methods validates the user when he/she signs in and send them to the correct side
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
         public IActionResult DBLogin(UserModel userModel)
         {
             if (hdb.isValid(userModel))
@@ -121,10 +158,19 @@ namespace HAWK_v.Controllers
                 return View("Fail", userModel);
             }
         }
+        /// <summary>
+        /// this controller opens signup page 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult SignUp()
         {
             return View();
         }
+        /// <summary>
+        /// this methods validates the user information when he/she signs up in the website and send them to the correct side
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public IActionResult RegistrationCheck(UserModel user)
         {
             if (user.Image != null)

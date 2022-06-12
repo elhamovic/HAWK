@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Services
 {
+    /// <summary>
+    /// This Class manages the communication with the HR Database
+    /// </summary>
     public class SignUpDB
     {
         string connectionString = @"Data Source=DESKTOP-6L8H12A\SFEXPRESS;Initial Catalog=HAWKSYS;User ID=smartface;Password=smartface;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Services
 {
+    /// <summary>
+    /// This class is a proxy between the database class and the controller
+    /// </summary>
     public class HRDB
     {
         SignUpDB signup = new SignUpDB();

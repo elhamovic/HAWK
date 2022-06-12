@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Helpers
 {
+    /// <summary>
+    /// This class manages the communication between the HAWK backend the the smartface backend.
+    /// </summary>
     public class SmartfaceRequest
     {
         private string serverName = "https://localhost:5001/Smartface/";

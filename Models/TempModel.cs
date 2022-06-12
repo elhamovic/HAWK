@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HAWK_v.Models
 {
+    /// <summary>
+    /// This Class Represent the TempModel attributes
+    /// </summary>
     public class TempModel
     { 
         public int Id { get; set; }
